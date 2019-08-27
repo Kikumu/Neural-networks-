@@ -7,17 +7,13 @@
 #include "Neuron.h"
 #include "outputLayer.h"
 
-vector<weights*>inputWeightsTemp;
-vector<weights*>hiddenWeightsTemp;
-vector<Neuron*>TempNeurons;
-vector<Neuron*>hLayerTemp;
 int  NumberOfInputNeurons = NULL;
 int  NumberOfHiddenLayerNeurons = NULL;
 int  numberOfOutputNeurons = NULL;
-vector<hiddenLayer>hLayer;
-vector<Neuron*>tempHlayerNeurons;
+vector<Neuron*>TempNeurons; //used in input
+vector<Neuron*>outputLayerNeurons;
+vector<Neuron*>hiddenLayerNeurons;
 
-//int size = NULL;
 //NB: lets first work with a single layered network shall we
 
 using namespace std;
@@ -26,7 +22,7 @@ int main(int, char**) {
 	inputLayer input;
 	hiddenLayer hidden;
 	outputLayer out;
-	//Neuron* const iNeuron = new Neuron;
+
 	//lets say i want 4 constant neurons in my inputlayer
 	//meaning store 4 constant pointers in my inputneurons
 	//need to create an empty set of desired neurons and push them into the inputlayer
@@ -40,33 +36,55 @@ int main(int, char**) {
 	cin >> NumberOfHiddenLayerNeurons;
 	cout << "****DONE****";
 	cout << "\n";
-	cout << "Set number of hidden layers";
+	cout << "Set number of output layer neurons";
 	cout << "\n";
 	cin >> numberOfOutputNeurons;
 	cout << "\n";
 	cout << "****Setting up....****";
+
+
 	//vector<Neuron*>hiddenLayerNeurons(NumberOfHiddenLayerNeurons); //set number of neurons in hidden layer
-	vector<Neuron*>hiddenLayerNeurons;
+	
 	//we need number of hidden layer neurons because of neuron to neuron connection
 	//the number of weights in input neuron is dependent on the number of neurons in the neuron layer
 	for (int i = 0; i < NumberOfInputNeurons; i++) {
 		Neuron* iNeuron = new Neuron;
 		for (int j = 0; j != NumberOfHiddenLayerNeurons; ++j) {
 			weights* iWeight = new weights;
+			//weights* hWeight = new weights;
 			Neuron* hNeuron = new Neuron; //hiddenLayerNeuron
 			iWeight->SetOneNeuron(iNeuron);
 			iWeight->setTwoNeuron(hNeuron);
 			hNeuron->addWeightsIn(iWeight);
 			iWeight->setWeight(iNeuron->randomizeWeights());
 			iNeuron->addWeightsOut(iWeight);
-			int size = hiddenLayerNeurons.size();
-			if(size < NumberOfHiddenLayerNeurons)
-			hiddenLayerNeurons.push_back(hNeuron);
+			//neuron limiter
+			int size = hiddenLayerNeurons.size(); //limiter for hidden neurons
+			if (size < NumberOfHiddenLayerNeurons)
+			{
+				//no need to set a new weight for output neuron it only takes in weights
+				for (int k = 0; k != numberOfOutputNeurons; k++) {
+					Neuron* oNeuron = new Neuron;
+					weights* hWeight = new weights;
+					hWeight->setWeight(hNeuron->randomizeWeights());
+					hWeight->SetOneNeuron(hNeuron);
+					hWeight->setTwoNeuron(oNeuron);
+					oNeuron->addWeightsIn(hWeight); //point toward the same thing
+					hNeuron->addWeightsOut(hWeight);//point towards the same thing
+
+					int size1 = outputLayerNeurons.size(); //limiter for output neurons
+					if (size1 < numberOfOutputNeurons)
+						outputLayerNeurons.push_back(oNeuron);
+					else
+						outputLayerNeurons.at(k)->addWeightsIn(hWeight);
+				}
+				hiddenLayerNeurons.push_back(hNeuron);
+			}
 			else 
 			{
-				hiddenLayerNeurons.at(j)->addWeightsIn(iWeight);
+			//LEARNT: YOU WILL NEED TO COMMUNICATE WITH THEM DIRECTLY LIKE THIS
+			hiddenLayerNeurons.at(j)->addWeightsIn(iWeight);
 			}
-			///if(size >= hiddenLayerNeurons.size())
 		}
 		//hiddenLayerNeurons.push_back(hNeuron);
 		//inputWeightsTemp.clear();
@@ -75,5 +93,6 @@ int main(int, char**) {
 	input.setNumberOfNeurons(TempNeurons);
 	TempNeurons.clear();
 	hidden.setNumberOfNeurons(hiddenLayerNeurons);
+	out.setNumberOfNeurons(outputLayerNeurons);
 	system("PAUSE");
 }

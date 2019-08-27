@@ -7,7 +7,7 @@ using namespace std;
 
 class Neuron;
 class weights;
-
+//placeholder for neurons
 class Layer
 {
 public:

@@ -1,0 +1,4 @@
+﻿  main.cpp
+c:\users\scowt\desktop\opencv c++\neural network pointers\neuralnetworkpointers\neuralnetworkpointers\main.cpp(66): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+c:\users\scowt\desktop\opencv c++\neural network pointers\neuralnetworkpointers\neuralnetworkpointers\main.cpp(79): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  NeuralNetworkPointers.vcxproj -> C:\Users\scowt\Desktop\opencv c++\Neural network pointers\NeuralNetworkPointers\NeuralNetworkPointers\x64\Debug\NeuralNetworkPointers.exe

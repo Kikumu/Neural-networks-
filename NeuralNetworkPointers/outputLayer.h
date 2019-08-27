@@ -7,7 +7,7 @@ using namespace std;
 
 class Layer;
 class Neuron;
-
+//placeholder for neurons
 class outputLayer : public Layer
 {
 public:
