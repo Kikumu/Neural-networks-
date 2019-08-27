@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BuildNetwork.h" />
     <ClInclude Include="hiddenLayer.h" />
     <ClInclude Include="inputLayer.h" />
     <ClInclude Include="Layer.h" />
@@ -123,6 +124,7 @@
     <ClInclude Include="weights.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BuildNetwork.cpp" />
     <ClCompile Include="hiddenLayer.cpp" />
     <ClCompile Include="inputLayer.cpp" />
     <ClCompile Include="Layer.cpp" />

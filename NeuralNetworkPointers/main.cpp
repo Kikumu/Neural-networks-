@@ -6,6 +6,7 @@
 #include "hiddenLayer.h"
 #include "Neuron.h"
 #include "outputLayer.h"
+#include "BuildNetwork.h"
 
 int  NumberOfInputNeurons = NULL;
 int  NumberOfHiddenLayerNeurons = NULL;
@@ -22,7 +23,7 @@ int main(int, char**) {
 	inputLayer input;
 	hiddenLayer hidden;
 	outputLayer out;
-
+	BuildNetwork network;
 	//lets say i want 4 constant neurons in my inputlayer
 	//meaning store 4 constant pointers in my inputneurons
 	//need to create an empty set of desired neurons and push them into the inputlayer
@@ -42,9 +43,8 @@ int main(int, char**) {
 	cout << "\n";
 	cout << "****Setting up....****";
 
-
 	//vector<Neuron*>hiddenLayerNeurons(NumberOfHiddenLayerNeurons); //set number of neurons in hidden layer
-	
+
 	//we need number of hidden layer neurons because of neuron to neuron connection
 	//the number of weights in input neuron is dependent on the number of neurons in the neuron layer
 	for (int i = 0; i < NumberOfInputNeurons; i++) {
@@ -71,7 +71,6 @@ int main(int, char**) {
 					hWeight->setTwoNeuron(oNeuron);
 					oNeuron->addWeightsIn(hWeight); //point toward the same thing
 					hNeuron->addWeightsOut(hWeight);//point towards the same thing
-
 					int size1 = outputLayerNeurons.size(); //limiter for output neurons
 					if (size1 < numberOfOutputNeurons)
 						outputLayerNeurons.push_back(oNeuron);
@@ -91,8 +90,15 @@ int main(int, char**) {
 		TempNeurons.push_back(iNeuron);
 	}
 	input.setNumberOfNeurons(TempNeurons);
-	TempNeurons.clear();
 	hidden.setNumberOfNeurons(hiddenLayerNeurons);
 	out.setNumberOfNeurons(outputLayerNeurons);
+	TempNeurons.clear();
+
+	cout << "\n";
+	cout << "****DONE INITIALISING****";
+	cout << "\n";
+	cout << "****APPLYING CALCULATIONS****";
+	network.setup(input, hidden, out);
+
 	system("PAUSE");
 }
