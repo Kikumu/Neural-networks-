@@ -5,28 +5,24 @@
 using namespace std;
 
 class weights;
-
+//all public because these values will keep changing/be changed by different layer to layer association
 class Neuron
 {
 public:
 	Neuron();
 	~Neuron();
-	void setOutputValue(double);
-	void setError(double);
-	void setSensibility(double);
-	void setWeightsIn(vector<weights*>);
-	void setWeightsOut(vector<weights*>);
-	void addWeightIn(weights*);
 	double randomizeWeights();
 	//getters
-
-	vector<weights*>getWeightsIn();
-	vector<weights*>getWeightsOut();
-private:
 	double outputValue;
 	double error;
 	double sensibility;
+	void addWeightsOut(weights *);
+	void addWeightsIn(weights *);
 	vector<weights*>neuronWeightsIn;
 	vector<weights*>neuronWeightsOut;
+	vector<weights*>getWeightsIn();
+	vector<weights*>getWeightsOut();
+private:
+	
 };
 
