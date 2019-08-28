@@ -119,6 +119,7 @@
     <ClInclude Include="hiddenLayer.h" />
     <ClInclude Include="inputLayer.h" />
     <ClInclude Include="Layer.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="outputLayer.h" />
     <ClInclude Include="Training.h" />
@@ -130,6 +131,7 @@
     <ClCompile Include="inputLayer.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="outputLayer.cpp" />
     <ClCompile Include="Training.cpp" />
