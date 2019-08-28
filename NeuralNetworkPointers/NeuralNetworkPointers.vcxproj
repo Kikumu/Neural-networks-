@@ -121,6 +121,7 @@
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Neuron.h" />
     <ClInclude Include="outputLayer.h" />
+    <ClInclude Include="Training.h" />
     <ClInclude Include="weights.h" />
   </ItemGroup>
   <ItemGroup>
@@ -131,6 +132,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Neuron.cpp" />
     <ClCompile Include="outputLayer.cpp" />
+    <ClCompile Include="Training.cpp" />
     <ClCompile Include="weights.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

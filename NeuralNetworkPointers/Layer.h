@@ -17,8 +17,8 @@ public:
 	void setNumberOfNeurons(vector<Neuron*>);
 	int getNumberOfNeurons(int);
 	vector<Neuron*>getNeurons();
-private:
 	vector<Neuron*>LayerNeurons;
+private:
 };
 
 

@@ -11,6 +11,7 @@ public:
 	~BuildNetwork();
 	void setup(inputLayer i, hiddenLayer h, outputLayer o);
 
+	
 private:
 
 };

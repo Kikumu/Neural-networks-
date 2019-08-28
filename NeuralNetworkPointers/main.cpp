@@ -98,7 +98,7 @@ int main(int, char**) {
 	cout << "****DONE INITIALISING****";
 	cout << "\n";
 	cout << "****APPLYING CALCULATIONS****";
-	network.setup(input, hidden, out);
-
+	//network.setup(input, hidden, out);
+    //training
 	system("PAUSE");
 }
