@@ -3,8 +3,6 @@
 
 class Matrix
 {
-	
-
 public:
 	Matrix();
 	~Matrix();
@@ -17,6 +15,5 @@ public:
 	void multiply(Matrix&, Matrix&);
 	void hadamard(Matrix&);
 private:
-
 };
 
