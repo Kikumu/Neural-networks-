@@ -1,5 +1,4 @@
 #pragma once
-#include "BuildNetwork.h"
 
 using namespace std;
 

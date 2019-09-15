@@ -1,7 +1,11 @@
 #include "Training.h"
+#include <cstdlib>
 
 Training::Training()
 {
+	epochs = NULL;
+	error = NULL;
+	MeanSquaredError = NULL;
 }
 
 Training::~Training()

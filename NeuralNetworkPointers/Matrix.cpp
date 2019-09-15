@@ -1,7 +1,12 @@
 #include "Matrix.h"
+#include <cstdlib>
 
 Matrix::Matrix()
 {
+	columns = NULL;
+	rows = NULL;
+	total = NULL;
+	data = NULL;
 }
 
 Matrix::~Matrix()
@@ -27,7 +32,7 @@ void Matrix::multiply(Matrix &a, Matrix &b) //addresses
 		for (int j = 0; j != b.columns; j++) {
 
 			for (int k = 0; k < sharedDimensions; k++) {
-				total += a(i, k) *b(k, j); //wikipedia
+				total += a(i, k) *b(k, j); //wikipedia. Summation convention
 			}
 			this->operator()(i, j) = total;
 		}

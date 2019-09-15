@@ -1,23 +1,39 @@
 #pragma once
 
 #include <vector>
-#include "Neuron.h"
+#include "Eigen/Core"
 
 using namespace std;
+using namespace Eigen;
 
-class Neuron;
-class weights;
+//class Neuron;
+//class weights;
 //placeholder for neurons
 class Layer
 {
 public:
-	Layer();
+	/*Layer(const int i, const int h) :number_of_inputs_size(i), number_of_output_size(h) {
+	};*/
+	Layer(int i, int h);
+
 	~Layer();
 
-	void setNumberOfNeurons(vector<Neuron*>);
-	int getNumberOfNeurons(int);
-	vector<Neuron*>getNeurons();
-	vector<Neuron*>LayerNeurons;
+	typedef Eigen::Matrix<double, Dynamic, Dynamic>Matrix; //calculated
+	typedef Eigen::Matrix<double, Dynamic, 1>Vector; //value passed onto layer
+
+	int getInputSize();
+	int getOutputSize();
+
+	void forwardPropagate(Matrix);
+
+	virtual void init(double mu, double sigma); //weights
+
+	virtual void backpropagation();
+protected:
+	int number_of_inputs_size; //input rows
+	int number_of_output_size; //layer rows
+
+
 private:
 };
 

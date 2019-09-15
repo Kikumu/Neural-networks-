@@ -1,27 +1,34 @@
 #include "Layer.h"
 
-Layer::Layer()
-{
+Layer::Layer(int i, int h):number_of_inputs_size(i),number_of_output_size(h) {
+	number_of_inputs_size = NULL;
+	number_of_output_size = NULL;
 }
 
 Layer::~Layer()
 {
 }
 
-void Layer::setNumberOfNeurons(vector<Neuron*> x)
+int Layer::getInputSize()
 {
-	LayerNeurons = x;
+	return number_of_inputs_size;
 }
 
-int Layer::getNumberOfNeurons(int x)
+int Layer::getOutputSize()
 {
-	x = LayerNeurons.size();
-	return x;
+	return number_of_output_size;
 }
 
-vector<Neuron*> Layer::getNeurons()
+void Layer::forwardPropagate(Matrix)
 {
-	return LayerNeurons;
+}
+
+void Layer::init(double mu, double sigma)
+{
+}
+
+void Layer::backpropagation()
+{
 }
 
 

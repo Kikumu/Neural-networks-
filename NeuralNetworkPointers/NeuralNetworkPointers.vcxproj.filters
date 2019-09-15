@@ -13,72 +13,74 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{e78501ed-399f-47df-948f-1f3af9275252}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Output">
+      <UniqueIdentifier>{b75eb1d9-4248-482b-9d2e-2c167a6dba56}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Activation">
+      <UniqueIdentifier>{07550627-383b-486c-835f-c1653082c3fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data">
+      <UniqueIdentifier>{91246c90-414c-4fde-bafa-9389416d74e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="weights.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Neuron.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Layer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="inputLayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hiddenLayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="outputLayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BuildNetwork.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Training.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Matrix.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="TrainNeurons.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Layer.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="outputLayer.h">
+      <Filter>Output</Filter>
+    </ClInclude>
+    <ClInclude Include="Training.h">
+      <Filter>Activation</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerMaxPooling.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="LayerAvgPooling.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="CostFunction.h">
+      <Filter>Output</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="weights.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Neuron.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Layer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="inputLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hiddenLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="outputLayer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BuildNetwork.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Training.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TrainNeurons.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="Layer.cpp">
+      <Filter>Layer</Filter>
     </ClCompile>
+    <ClCompile Include="outputLayer.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="Training.cpp">
+      <Filter>Activation</Filter>
+    </ClCompile>
+    <ClCompile Include="LayerAvgPooling.cpp">
+      <Filter>Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="LayerMaxPooling.cpp">
+      <Filter>Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="CostFunction.cpp">
+      <Filter>Output</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="D:\githubrepository\Neural-networks-\NeuralNetworkPointers\kagglecatsanddogs_3367a\PetImages\Cat\0.jpg">
+      <Filter>Data</Filter>
+    </Image>
+    <Image Include="D:\githubrepository\Neural-networks-\NeuralNetworkPointers\kagglecatsanddogs_3367a\PetImages\Cat\1.jpg">
+      <Filter>Data</Filter>
+    </Image>
   </ItemGroup>
 </Project>
