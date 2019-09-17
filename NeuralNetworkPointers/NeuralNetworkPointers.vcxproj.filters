@@ -48,6 +48,9 @@
     <ClInclude Include="CostFunction.h">
       <Filter>Output</Filter>
     </ClInclude>
+    <ClInclude Include="RNN.h">
+      <Filter>Layer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -73,6 +76,9 @@
     </ClCompile>
     <ClCompile Include="CostFunction.cpp">
       <Filter>Output</Filter>
+    </ClCompile>
+    <ClCompile Include="RNN.cpp">
+      <Filter>Layer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

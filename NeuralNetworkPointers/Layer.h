@@ -26,7 +26,7 @@ public:
 
 	void forwardPropagate(Matrix);
 
-	virtual void init(double mu, double sigma); //weights
+	
 
 	virtual void backpropagation();
 protected:
@@ -35,6 +35,7 @@ protected:
 
 
 private:
+	virtual void init(double mu, double sigma); //weights
 };
 
 

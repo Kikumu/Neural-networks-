@@ -34,7 +34,7 @@ double** LayerMaxPooling::resultant(double input[][100])
 			}
 		}
 	}
-	int k = 0;
+	int k = 0; //note arrays are a myth pointers are GOATS
 	convdat = new double*[60];
 	for (int r = 0; r < 60; r++) {
 		convdat[r] = new double[60];

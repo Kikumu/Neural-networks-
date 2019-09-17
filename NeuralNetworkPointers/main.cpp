@@ -30,10 +30,10 @@ int main(int argc, char** argv) {
 			darray[i][j] = +(img_gray.at<char>(i, j)); //if you encounter an error during transfer of image data its probably here
 		}
 	}
-	double** resFromFuncPrototype3 = maxpooling.resultant3(darray); //already passed vals
+	double** resFromFuncPrototype3 = maxpooling.resultant(darray); //already passed vals
 	//print array
-	for (int r = 0; r < 40; r++) {
-		for (int c = 0; c < 40; c++) {
+	for (int r = 0; r < 60; r++) {
+		for (int c = 0; c < 60; c++) {
 			cout << resFromFuncPrototype3[r][c]; 
 			cout << " ";
 		}
