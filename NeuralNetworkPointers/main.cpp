@@ -10,12 +10,14 @@
 #include "Training.h"
 #include "Eigen/Core"
 #include "LayerMaxPooling.h"
+#include "Layer.h"
 Training t;
 
 using namespace std;
 using namespace cv;
 
 LayerMaxPooling maxpooling;
+Layer LayerFunc;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 
@@ -30,15 +32,8 @@ int main(int argc, char** argv) {
 			darray[i][j] = +(img_gray.at<char>(i, j)); //if you encounter an error during transfer of image data its probably here
 		}
 	}
-	double** resFromFuncPrototype3 = maxpooling.resultant(darray); //already passed vals
-	//print array
-	for (int r = 0; r < 60; r++) {
-		for (int c = 0; c < 60; c++) {
-			cout << resFromFuncPrototype3[r][c]; 
-			cout << " ";
-		}
-		cout << "\n";
-	}
+	double** poolLayer = maxpooling.resultant(darray); //already passed vals *60  by 60 from 100 by 100)
+	double** fPropagate = LayerFunc.forwardPropagate(poolLayer);
 	waitKey(0);
 	return 0;
 }

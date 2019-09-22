@@ -15,7 +15,7 @@ public:
 	/*Layer(const int i, const int h) :number_of_inputs_size(i), number_of_output_size(h) {
 	};*/
 	Layer(int i, int h);
-
+	Layer();
 	~Layer();
 
 	typedef Eigen::Matrix<double, Dynamic, Dynamic>Matrix; //calculated
@@ -24,11 +24,11 @@ public:
 	int getInputSize();
 	int getOutputSize();
 
-	void forwardPropagate(Matrix);
-
+	double** forwardPropagate(double**);
+	double LayerSensitivity();
 	
-
 	virtual void backpropagation();
+
 protected:
 	int number_of_inputs_size; //input rows
 	int number_of_output_size; //layer rows

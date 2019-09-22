@@ -5,6 +5,10 @@ Layer::Layer(int i, int h):number_of_inputs_size(i),number_of_output_size(h) {
 	number_of_output_size = NULL;
 }
 
+Layer::Layer()
+{
+}
+
 Layer::~Layer()
 {
 }
@@ -19,9 +23,25 @@ int Layer::getOutputSize()
 	return number_of_output_size;
 }
 
-void Layer::forwardPropagate(Matrix)
+//double** Layer::forwardPropagate(double[][100])
+//{
+//	//initialise weights
+//	//place an rng to each var
+//
+//	return nullptr;
+//}
+
+double** Layer::forwardPropagate(double**)
 {
+	return nullptr;
 }
+
+double Layer::LayerSensitivity()
+{
+	return 0.0;
+}
+
+
 
 void Layer::init(double mu, double sigma)
 {

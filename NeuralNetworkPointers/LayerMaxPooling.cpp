@@ -2,6 +2,7 @@
 #include "Eigen/Core"
 #include <vector>
 
+
 using namespace std;
 
 LayerMaxPooling::LayerMaxPooling()
