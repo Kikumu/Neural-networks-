@@ -128,10 +128,12 @@
     <ClInclude Include="LayerMaxPooling.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="outputLayer.h" />
+    <ClInclude Include="RNG.h" />
     <ClInclude Include="RNN.h" />
     <ClInclude Include="Training.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\RNG2\RNG2\RNG.cpp" />
     <ClCompile Include="CostFunction.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="LayerAvgPooling.cpp" />

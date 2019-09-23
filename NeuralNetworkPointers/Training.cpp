@@ -29,9 +29,7 @@ double Training::funcSinc(double n)
 
 double Training::funcSwish(double n) //alternative to relu
 {
-	int x = NULL;
-	x = n / (1.0 + exp(-n));
-	return x;
+	return n / (1.0 + exp(-n));
 }
 
 double Training::fncSigmoidDerivative(double n)

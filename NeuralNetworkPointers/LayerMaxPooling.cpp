@@ -7,7 +7,7 @@ using namespace std;
 
 LayerMaxPooling::LayerMaxPooling()
 {
-	//stride = 40;
+	
 }
 
 LayerMaxPooling::~LayerMaxPooling()
@@ -44,7 +44,12 @@ double** LayerMaxPooling::resultant(double input[][100])
 			++k;
 		}
 	}
-	return convdat;
+	return convdat; //activation map dim * 60
+	///are we supposed to multiply conv layer by respective weights hence "activation map" hence neurons formed
+}
+
+void LayerMaxPooling::poolLayerby40(double**)
+{
 }
 
 

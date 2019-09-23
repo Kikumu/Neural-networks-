@@ -24,10 +24,14 @@ public:
 	int getInputSize();
 	int getOutputSize();
 
-	double** forwardPropagate(double**);
+	void forwardPropagate(double**);
 	double LayerSensitivity();
 	
 	virtual void backpropagation();
+
+	vector<double>Firstweight;
+	vector<double>firstLayerData;
+	//layer 1 data, layer 2 data.....layer n data
 
 protected:
 	int number_of_inputs_size; //input rows

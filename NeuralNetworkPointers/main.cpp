@@ -33,7 +33,9 @@ int main(int argc, char** argv) {
 		}
 	}
 	double** poolLayer = maxpooling.resultant(darray); //already passed vals *60  by 60 from 100 by 100)
-	double** fPropagate = LayerFunc.forwardPropagate(poolLayer);
+    LayerFunc.forwardPropagate(poolLayer);
+	//pool more 40 by 40
+	//double**poolLayer2 =
 	waitKey(0);
 	return 0;
 }
