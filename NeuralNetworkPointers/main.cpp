@@ -38,24 +38,9 @@ int main(int argc, char** argv) {
 	LayerFunc.forwardPropagate2(poolLayer2);
 	vector<double>predictions = LayerFunc.secondLayerData;
 	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 2; j++) {
-			cout << poolLayer2[i][j];
-			cout << " ";
-		}
+		cout << predictions[i];
 		cout << "\n";
 	}
-	//pool more 40 by 40
-	//double**poolLayer2 =
-
-
-	
-
-
-
-
-
-
-
 	waitKey(0);
 	return 0;
 }
