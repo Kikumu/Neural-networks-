@@ -34,8 +34,28 @@ int main(int argc, char** argv) {
 	}
 	double** poolLayer = maxpooling.resultant(darray); //already passed vals *60  by 60 from 100 by 100)
     LayerFunc.forwardPropagate(poolLayer);
+	double** poolLayer2 = maxpooling.poolLayerby40(poolLayer);
+	LayerFunc.forwardPropagate2(poolLayer2);
+	vector<double>predictions = LayerFunc.secondLayerData;
+	for (int i = 0; i < 2; i++) {
+		for (int j = 0; j < 2; j++) {
+			cout << poolLayer2[i][j];
+			cout << " ";
+		}
+		cout << "\n";
+	}
 	//pool more 40 by 40
 	//double**poolLayer2 =
+
+
+	
+
+
+
+
+
+
+
 	waitKey(0);
 	return 0;
 }

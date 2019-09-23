@@ -25,12 +25,15 @@ public:
 	int getOutputSize();
 
 	void forwardPropagate(double**);
+	void forwardPropagate2(double**);
 	double LayerSensitivity();
 	
 	virtual void backpropagation();
 
 	vector<double>Firstweight;
+	vector<double>SecondWeight;
 	vector<double>firstLayerData;
+	vector<double>secondLayerData;
 	//layer 1 data, layer 2 data.....layer n data
 
 protected:

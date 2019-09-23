@@ -14,6 +14,6 @@ public:
 	LayerMaxPooling();
 	~LayerMaxPooling();
 	double** resultant(double[][100]);
-	void poolLayerby40(double**);
+	double** poolLayerby40(double**);
 	int stride;
 };
