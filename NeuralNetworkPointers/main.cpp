@@ -11,14 +11,12 @@
 #include "Eigen/Core"
 #include "LayerMaxPooling.h"
 #include "Layer.h"
-#include "CostFunction.h"
 
 using namespace std;
 using namespace cv;
 
 LayerMaxPooling maxpooling;
 Layer LayerFunc;
-CostFunction cost;
 
 //using namespace Eigen;
 int main(int argc, char** argv) {
@@ -38,18 +36,14 @@ int main(int argc, char** argv) {
     LayerFunc.forwardPropagate(poolLayer);
 	double** poolLayer2 = maxpooling.poolLayerby40(poolLayer);
 	LayerFunc.forwardPropagate2(poolLayer2);
-	//vector<double>predictions = LayerFunc.secondLayerData;
 	//dummy label
-	//vector<double>label;
-	//label.push_back(1.0);
-	//label.push_back(0.0);
 	double predictions[2];
 	predictions[0] = LayerFunc.secondLayerData[0];
 	predictions[1] = LayerFunc.secondLayerData[1];
 	double label[2];
 	label[0] = 0.0;
 	label[1] = 1.0;
-	cost.costRes(100.0, 10000.0, predictions, label);
+	LayerFunc.costRes(100.0, 10000.0, predictions, label);
 	//create a condition such that if data is from cat clear label and put top 1 and bottom zero and vice versa for dog
 	//clear pointers
 	cout << "predictions:";
@@ -58,10 +52,11 @@ int main(int argc, char** argv) {
 		cout << predictions[i];
 		cout << "\n";
 	}
-
+	cout << "\n";
+	cout << "\n";
 	cout << "Cost data:";
 	cout << "\n";
-	cout << LayerFunc.costData[0];
+    cout<< LayerFunc.costData.at(0);
 	waitKey(0);
 	return 0;
 }

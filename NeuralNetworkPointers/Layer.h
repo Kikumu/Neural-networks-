@@ -37,6 +37,8 @@ public:
 	vector<double>costData;
 	//layer 1 data, layer 2 data.....layer n data
 
+	void costRes(double, double, double[2], double[2]);
+
 protected:
 	int number_of_inputs_size; //input rows
 	int number_of_output_size; //layer rows

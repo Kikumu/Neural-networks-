@@ -128,6 +128,28 @@ double Layer::LayerSensitivity()
 
 
 
+void Layer::costRes(double totalNumberOfTrainingInputs, double inputs, double predicted_output[2], double desired_output[2])
+{
+	Eigen::Vector2d actual_output;
+	Eigen::Vector2d network_output;
+	Eigen::Vector2d difference;
+	double length;
+	double costData1;
+	for (int i = 0; i < 2; i++) {
+		network_output(i) = predicted_output[i]; //copied layer output to eigen
+		actual_output(i) = desired_output[i];
+	}
+	difference = actual_output - network_output;
+	length = difference.squaredNorm();
+	double sum = 0;
+	for (int i = 0; i < inputs; i++)
+	{
+		sum += length;
+	}
+	costData1 = (1.0 / (2.0 * inputs)) * sum;
+	costData.push_back(costData1);
+}
+
 void Layer::init(double mu, double sigma)
 {
 }
