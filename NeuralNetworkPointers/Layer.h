@@ -35,6 +35,8 @@ public:
 	vector<double>firstLayerData;
 	vector<double>secondLayerData;
 	vector<double>costData;
+
+
 	//layer 1 data, layer 2 data.....layer n data
 
 	void costRes(double, double, double[2], double[2]);
