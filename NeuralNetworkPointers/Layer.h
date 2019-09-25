@@ -18,8 +18,8 @@ public:
 	Layer();
 	~Layer();
 
-	typedef Eigen::Matrix<double, Dynamic, Dynamic>Matrix; //calculated
-	typedef Eigen::Matrix<double, Dynamic, 1>Vector; //value passed onto layer
+	//typedef Eigen::Matrix<double, Dynamic, Dynamic>Matrix; //calculated
+	//typedef Eigen::Matrix<double, Dynamic, 1>Vector; //value passed onto layer
 
 	int getInputSize();
 	int getOutputSize();
@@ -34,6 +34,7 @@ public:
 	vector<double>SecondWeight;
 	vector<double>firstLayerData;
 	vector<double>secondLayerData;
+	vector<double>costData;
 	//layer 1 data, layer 2 data.....layer n data
 
 protected:
