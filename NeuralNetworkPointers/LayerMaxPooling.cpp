@@ -52,6 +52,7 @@ double** LayerMaxPooling::resultant(double input[][100])
 
 double** LayerMaxPooling::poolLayerby40(double**i)
 {
+	//outputsize calc = (inputwidth - filterwidth)/stride + 1
 	Eigen::Matrix<double, 60, 60>inputData;
 	Eigen::Matrix<double, 20, 20>filter1;
 	Eigen::Matrix<double, 2, 2>outData; //activationmap

@@ -6,9 +6,6 @@
 using namespace std;
 using namespace Eigen;
 
-//class Neuron;
-//class weights;
-//placeholder for neurons
 class Layer
 {
 public:
@@ -17,9 +14,6 @@ public:
 	Layer(int i, int h);
 	Layer();
 	~Layer();
-
-	//typedef Eigen::Matrix<double, Dynamic, Dynamic>Matrix; //calculated
-	//typedef Eigen::Matrix<double, Dynamic, 1>Vector; //value passed onto layer
 
 	int getInputSize();
 	int getOutputSize();
@@ -32,8 +26,8 @@ public:
 
 	vector<double>Firstweight;
 	vector<double>SecondWeight;
-	vector<double>firstLayerData;
-	vector<double>secondLayerData;
+	vector<double>firstLayerData; //neurons
+	vector<double>secondLayerData; //neurons
 	vector<double>costData;
 
 
