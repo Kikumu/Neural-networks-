@@ -13,8 +13,8 @@ public:
 	void calc();
 	void calc1();
 
-	int s1;
-	int s2;
+	double s1;
+	double s2;
 private:
 
 };
