@@ -2,14 +2,14 @@
 
 #pragma once
 
-
+using namespace std;
 class Convolve
 {
 public:
 	Convolve();
 	~Convolve();
-
-	double** convole1(double[][100]);
+	vector<vector<double>>convole1(double[][100]);
+	//double** convole1(double[][100]);
 private:
 
 };

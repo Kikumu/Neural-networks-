@@ -19,6 +19,8 @@ using namespace cv;
 LayerMaxPooling maxpooling;
 Layer LayerFunc;
 Convolve conv;
+vector<vector<double>>FeatureConv;
+
 //using namespace Eigen;
 int main(int argc, char** argv) {
 
@@ -33,11 +35,11 @@ int main(int argc, char** argv) {
 			darray[i][j] = +(img_gray.at<char>(i, j)); //if you encounter an error during transfer of image data its probably here
 		}
 	}
-	conv.convole1(darray);
+	FeatureConv = conv.convole1(darray);
 	double** poolLayer = maxpooling.resultant(darray); //already passed vals *60  by 60 from 100 by 100)
-    LayerFunc.forwardPropagate(poolLayer);
+    //LayerFunc.forwardPropagate(poolLayer);
 	double** poolLayer2 = maxpooling.poolLayerby40(poolLayer);
-	LayerFunc.forwardPropagate2(poolLayer2);
+	//LayerFunc.forwardPropagate2(poolLayer2);
 	//dummy label
 	double predictions[2];
 	predictions[0] = LayerFunc.secondLayerData[0];
