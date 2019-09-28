@@ -8,6 +8,13 @@ public:
 	outputLayer();
 	~outputLayer();
 
+	//each feature will have its own weight
+	vector<vector<double>>features;
+	void calc();
+	void calc1();
+
+	int s1;
+	int s2;
 private:
 
 };

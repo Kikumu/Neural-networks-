@@ -50,6 +50,8 @@ double** LayerMaxPooling::resultant(double input[][100])
 	///are we supposed to multiply conv layer by respective weights hence "activation map" hence neurons formed
 }
 
+
+
 double** LayerMaxPooling::poolLayerby40(double**i)
 {
 	//outputsize calc = (inputwidth - filterwidth)/stride + 1
@@ -69,7 +71,7 @@ double** LayerMaxPooling::poolLayerby40(double**i)
 
 
 	for (int r = 0; r < 60; r++) {
-		if (r < 35) {
+		if (r < 35) {   
 			r + stride;
 			for (int c = 0; c < 40; c++) {
 				if (c < 35) {
@@ -93,6 +95,64 @@ double** LayerMaxPooling::poolLayerby40(double**i)
 
 	return outData1;
 }
+
+//19 by 19
+
+
+void LayerMaxPooling::poolConv(vector<double> e)
+{
+	Eigen::Matrix<double, 19, 19>inputTensor;
+	vector<double>maxNumberStore;
+	Eigen::Matrix<double, 5, 5>filter;
+
+	int k = 0;
+	for (int i = 0; i != 19; i++) {
+		for (int j = 0; j != 19; j++) {
+			inputTensor(i, j) = e[k]; //matrix for takin in input
+			++k;
+		}
+	}
+
+	for (int r = 0; r < 19; r++) {
+		if (r < 15) {
+			for (int c = 0; c < 19; c++) {
+				if (c < 15) {
+					filter = inputTensor.block(r, c, 5, 5);
+					maxNumberStore.push_back(filter.maxCoeff());
+				}
+			}
+		}
+	}
+	pooledConv.push_back(maxNumberStore);
+}
+
+void LayerMaxPooling::poolConv2(vector<double>e)
+{
+	Eigen::Matrix<double, 13, 13>inputTensor;
+	vector<double>maxNumberStore;
+	Eigen::Matrix<double, 5, 5>filter;
+
+	int k = 0;
+	for (int i = 0; i != 13; i++) {
+		for (int j = 0; j != 13; j++) {
+			inputTensor(i, j) = e[k]; //matrix for takin in input
+			++k;
+		}
+	}
+
+	for (int r = 0; r < 13; r++) {
+		if (r < 8) {
+			for (int c = 0; c < 13; c++) {
+				if (c < 8) {
+					filter = inputTensor.block(r, c, 5, 5);
+					maxNumberStore.push_back(filter.maxCoeff());
+				}
+			}
+		}
+	}
+	pooledConv1.push_back(maxNumberStore);
+}
+
 
 
 

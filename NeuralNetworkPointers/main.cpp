@@ -12,6 +12,7 @@
 #include "LayerMaxPooling.h"
 #include "Layer.h"
 #include "Convolve.h"
+#include "outputLayer.h"
 
 using namespace std;
 using namespace cv;
@@ -19,7 +20,7 @@ using namespace cv;
 LayerMaxPooling maxpooling;
 Layer LayerFunc;
 Convolve conv;
-vector<vector<double>>FeatureConv;
+outputLayer output;
 
 //using namespace Eigen;
 int main(int argc, char** argv) {
@@ -29,21 +30,27 @@ int main(int argc, char** argv) {
 	img_gray = imread("1.jpg");
 	Mat img;
 	cvtColor(img_gray, img, cv::COLOR_BGR2GRAY);
-	double darray[100][100];//meaning its taking in 90000 elements
+	double darray[100][100];
 	for (int i = 0; i != img_gray.cols; i++) {
 		for (int j = 0; j != img_gray.rows; j++) {
 			darray[i][j] = +(img_gray.at<char>(i, j)); //if you encounter an error during transfer of image data its probably here
 		}
 	}
-	FeatureConv = conv.convole1(darray);
-	double** poolLayer = maxpooling.resultant(darray); //already passed vals *60  by 60 from 100 by 100)
-    //LayerFunc.forwardPropagate(poolLayer);
-	double** poolLayer2 = maxpooling.poolLayerby40(poolLayer);
-	//LayerFunc.forwardPropagate2(poolLayer2);
-	//dummy label
+	conv.convole1(darray);
+	for(int i = 0; i < 3; i++)
+		maxpooling.poolConv(conv.featureMapData1[i]);
+	for(int i = 0; i < 3; i++)
+	    conv.convolve2(maxpooling.pooledConv[i]);
+	for(int i = 0; i < 12; i++)
+	    maxpooling.poolConv2(conv.featureMapData2[i]);
+	for (int i = 0; i < 12; i++)
+		conv.convolve3(maxpooling.pooledConv1[i]);
+	output.features = conv.featureMapData3;
+	output.calc();
+	output.calc1();
 	double predictions[2];
-	predictions[0] = LayerFunc.secondLayerData[0];
-	predictions[1] = LayerFunc.secondLayerData[1];
+	predictions[0] = output.s1;
+	predictions[1] = output.s2;
 	double label[2];
 	label[0] = 0.0;
 	label[1] = 1.0;
