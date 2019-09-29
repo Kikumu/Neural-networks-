@@ -18,12 +18,18 @@ public:
 	int getInputSize();
 	int getOutputSize();
 
-	void forwardPropagate(double**);
-	void forwardPropagate2(double**);
+	int counter;
 	double LayerSensitivity();
 	
-	virtual void backpropagation();
+	void backpropagation();
+	vector<double>outputLayerWeightData;
 
+
+
+
+
+	void forwardPropagate(double**);
+	void forwardPropagate2(double**);
 	vector<double>Firstweight;
 	vector<double>SecondWeight;
 	vector<double>firstLayerData; //neurons
@@ -34,6 +40,7 @@ public:
 	//layer 1 data, layer 2 data.....layer n data
 
 	void costRes(double, double, double[2], double[2]);
+	void costResDer(double, double, double[2], double[2]);
 
 protected:
 	int number_of_inputs_size; //input rows

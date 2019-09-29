@@ -47,31 +47,91 @@ void Convolve::convole1(double i[][100])
 	generator.seed(time(0));
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
+	vector<double>saveFilter1;
+	vector<double>saveFilter2;
+	vector<double>saveFilter3;
+	vector<double>saveFilter4;
 
-	for (int r = 0; r < 5; r++)
+	if (data1.size() == 0)
 	{
-		for (int c = 0; c < 5; c++) {
-			FilterSize(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+		for (int r = 0; r < 5; r++)
+		{
+			for (int c = 0; c < 5; c++) {
+				FilterSize(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+				saveFilter1.push_back(FilterSize(r, c));
+			}
 		}
-	}
-	for (int r = 0; r < 5; r++)
-	{
-		for (int c = 0; c < 5; c++) {
-			FilterSize1(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+		data1.push_back(saveFilter1);
+		for (int r = 0; r < 5; r++)
+		{
+			for (int c = 0; c < 5; c++) {
+				FilterSize1(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+				saveFilter2.push_back(FilterSize1(r, c));
+			}
 		}
-	}
-	for (int r = 0; r < 5; r++)
-	{
-		for (int c = 0; c < 5; c++) {
-			FilterSize2(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+		data1.push_back(saveFilter2);
+		for (int r = 0; r < 5; r++)
+		{
+			for (int c = 0; c < 5; c++) {
+				FilterSize2(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+				saveFilter3.push_back(FilterSize2(r, c));
+			}
 		}
-	}
-	for (int r = 0; r < 5; r++)
-	{
-		for (int c = 0; c < 5; c++) {
-			FilterSize3(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+		data1.push_back(saveFilter3);
+		for (int r = 0; r < 5; r++)
+		{
+			for (int c = 0; c < 5; c++) {
+				FilterSize3(r, c) = (random = hue(generator)) / 25; //divide by 5 to scale with number of inputs
+				saveFilter4.push_back(FilterSize3(r, c));
+			}
 		}
+		data1.push_back(saveFilter4);
 	}
+	else {
+			data1.at(0) = saveFilter1;
+			data1.at(1) = saveFilter2;
+			data1.at(2) = saveFilter3;
+			data1.at(3) = saveFilter4;
+			int k = 0;
+
+			for (int r = 0; r < 5; r++)
+			{
+				for (int c = 0; c < 5; c++) {
+					FilterSize(r, c) = saveFilter1.at(k);
+					++k;
+				}
+			}
+			
+			k = 0;
+			for (int r = 0; r < 5; r++)
+			{
+				for (int c = 0; c < 5; c++) {
+					FilterSize1(r, c) = saveFilter2.at(k);
+					++k;
+				}
+			}
+			
+			k = 0;
+			for (int r = 0; r < 5; r++)
+			{
+				for (int c = 0; c < 5; c++) {
+					FilterSize2(r, c) = saveFilter3.at(k);
+					++k;
+				}
+			}
+			
+			k = 0;
+			for (int r = 0; r < 5; r++)
+			{
+				for (int c = 0; c < 5; c++) {
+					FilterSize3(r, c) = saveFilter4.at(k);
+					++k;
+				}
+			}
+			k = 0;
+			
+	}
+	
 
 	/*FilterSize1 = 2 * FilterSize1;
 	FilterSize2 = 3 * FilterSize2;
@@ -203,31 +263,92 @@ void Convolve::convolve2(vector<double>in)
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
 
-	for (int r = 0; r < 2; r++)
-	{
-		for (int c = 0; c < 2; c++) {
-			FilterSize(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
-		}
-	}
-	for (int r = 0; r < 2; r++)
-	{
-		for (int c = 0; c < 2; c++) {
-			FilterSize1(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
-		}
-	}
-	for (int r = 0; r < 2; r++)
-	{
-		for (int c = 0; c < 2; c++) {
-			FilterSize2(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
-		}
-	}
-	for (int r = 0; r < 2; r++)
-	{
-		for (int c = 0; c < 2; c++) {
-			FilterSize3(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
-		}
-	}
+	vector<double>saveFilter1;
+	vector<double>saveFilter2;
+	vector<double>saveFilter3;
+	vector<double>saveFilter4;
 
+	if (data2.size() != 12) {
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
+				saveFilter1.push_back(FilterSize(r, c));
+			}
+		}
+		data2.push_back(saveFilter1);
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize1(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
+				saveFilter2.push_back(FilterSize1(r, c));
+			}
+		}
+		data2.push_back(saveFilter2);
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize2(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
+				saveFilter3.push_back(FilterSize2(r, c));
+			}
+		}
+		data2.push_back(saveFilter3);
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize3(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
+				saveFilter4.push_back(FilterSize3(r, c));
+			}
+		}
+		data2.push_back(saveFilter4);
+	}
+	else 
+	{
+		//twelvw
+		data2.at(0) = saveFilter1;
+		data2.at(1) = saveFilter2;
+		data2.at(2) = saveFilter3;
+		data2.at(3) = saveFilter4;
+		int k = 0;
+
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize(r, c) = saveFilter1.at(k);
+				++k;
+			}
+		}
+
+		k = 0;
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize1(r, c) = saveFilter2.at(k);
+				++k;
+			}
+		}
+
+		k = 0;
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize2(r, c) = saveFilter3.at(k);
+				++k;
+			}
+		}
+
+		k = 0;
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize3(r, c) = saveFilter4.at(k);
+				++k;
+			}
+		}
+		k = 0;
+
+	}
+	
 	//f1
 	for (int r = 0; r < 15; r++) {
 		if (r < 13) {
@@ -352,19 +473,54 @@ void Convolve::convolve3(vector<double>in)
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
 
-	for (int r = 0; r < 2; r++)
-	{
-		for (int c = 0; c < 2; c++) {
-			FilterSize(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
-		}
-	}
+	vector<double>saveFilter1;
+	vector<double>saveFilter2;
 
-	for (int r = 0; r < 2; r++)
-	{
-		for (int c = 0; c < 2; c++) {
-			FilterSize1(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
+	if (data3.size() != 24) {
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
+				saveFilter1.push_back(FilterSize(r, c));
+			}
 		}
+		data3.push_back(saveFilter1);
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize1(r, c) = (random = hue(generator)) / 4; //divide by 5 to scale with number of inputs
+				saveFilter2.push_back(FilterSize1(r, c));
+			}
+		}
+		data3.push_back(saveFilter2);
 	}
+	else {
+		//24. loop through filter one and 2 separately
+		data3.at(0) = saveFilter1;
+		data3.at(1) = saveFilter2;
+		int k = 0;
+
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize(r, c) = saveFilter1.at(k);
+				++k;
+			}
+		}
+
+		k = 0;
+		for (int r = 0; r < 2; r++)
+		{
+			for (int c = 0; c < 2; c++) {
+				FilterSize1(r, c) = saveFilter2.at(k);
+				++k;
+			}
+		}
+
+		k = 0;
+
+	}
+	
 
 	//f1
 	for (int r = 0; r < 8; r++) {

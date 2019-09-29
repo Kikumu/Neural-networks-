@@ -25,6 +25,7 @@ outputLayer output;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 
+	int k = 0;
 	//im starting with kaggle cats and dogs for c++
 	Mat img_gray;
 	img_gray = imread("1.jpg");
@@ -51,23 +52,33 @@ int main(int argc, char** argv) {
 	double predictions[2];
 	predictions[0] = output.s1;
 	predictions[1] = output.s2;
+
 	double label[2];
 	label[0] = 0.0;
 	label[1] = 1.0;
+
 	LayerFunc.costRes(100.0, 10000.0, predictions, label);
-	//create a condition such that if data is from cat clear label and put top 1 and bottom zero and vice versa for dog
-	//clear pointers
+	LayerFunc.costResDer(100.0, 10000.0, predictions, label);
 	cout << "predictions:";
 	cout << "\n";
 	for (int i = 0; i < 2; i++) {
 		cout << predictions[i];
 		cout << "\n";
 	}
+	/////////////////////////////////////////////////////////////////////////////not looping through data 2 and 3 properly during backprop
 	cout << "\n";
 	cout << "\n";
 	cout << "Cost data:";
 	cout << "\n";
     cout<< LayerFunc.costData.at(0);
+	cout << "\n";
+	cout << "\n";
+	cout << "Cost data derivative:";
+	cout << "\n";
+	cout << LayerFunc.costData.at(1);
+	k++;
+	LayerFunc.counter = k;
+	conv.counter1 = k;
 	waitKey(0);
 	return 0;
 }
