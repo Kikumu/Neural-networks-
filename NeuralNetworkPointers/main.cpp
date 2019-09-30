@@ -77,8 +77,10 @@ int main(int argc, char** argv) {
 	cout << "\n";
 	cout << LayerFunc.costData.at(1);
 	k++;
-	LayerFunc.counter = k;
-	conv.counter1 = k;
+	//LayerFunc.counter = k;
+	//conv.counter1 = k;
+	conv.datacounter1 = 0;
+	conv.datacounter2 = 0;
 	waitKey(0);
 	return 0;
 }

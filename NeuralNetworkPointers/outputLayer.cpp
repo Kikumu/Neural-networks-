@@ -108,7 +108,7 @@ void outputLayer::calc1()
 		for (int r = 0; r < 2; r++)
 		{
 			for (int c = 0; c < 2; c++) {
-				dat = trainOut.fncSigmoid(Pre_(r, c));
+				dat = trainOut.funcSinc(Pre_(r, c));
 				sum += dat;
 				Pre_(r, c) = dat;
 			}

@@ -458,6 +458,8 @@ void Convolve::convolve3(vector<double>in)
 	Eigen::Matrix<double, 2, 2>FilterSize; //weights
 	Eigen::Matrix<double, 2, 2>FilterSize1; //weights
 	Eigen::Matrix<double, 2, 2>inputChunk;
+	vector<double>ic_tkr;
+	vector<double>ic_tkr1;
 	//Eigen::Matrix<double, 19, 19>activationMap; //feature map
 	//Eigen::Matrix<double, 19, 19>activationMap1; //feature map
 	//Eigen::Matrix<double, 19, 19>activationMap2; //feature map
@@ -538,6 +540,11 @@ void Convolve::convolve3(vector<double>in)
 				if (c < 6) {
 					c += stride;
 					inputChunk = input.block(r, c, 2, 2);
+					//int z = 0;
+					for (int i = 0; i < 2; i++) {
+						for (int j = 0; j < 2; j++)
+							ic_tkr.push_back(inputChunk(i, j)); ////////////
+					}
 					pre_activation = inputChunk * FilterSize;
 					for (int r = 0; r < 2; r++) {
 						for (int c = 0; c < 2; c++) {
@@ -552,7 +559,7 @@ void Convolve::convolve3(vector<double>in)
 		}
 	}
 	featureMapData3.push_back(filter_summary);
-
+	inputbackprop1.push_back(ic_tkr);
 	//f2
 	for (int r = 0; r < 8; r++) {
 		if (r < 6) {
@@ -562,6 +569,10 @@ void Convolve::convolve3(vector<double>in)
 					c += stride;
 					inputChunk = input.block(r, c, 2, 2);
 					pre_activation = inputChunk * FilterSize1;
+					for (int i = 0; i < 2; i++) {
+						for (int j = 0; j < 2; j++)
+							ic_tkr1.push_back(inputChunk(i, j)); ////////////
+					}
 					for (int r = 0; r < 2; r++) {
 						for (int c = 0; c < 2; c++) {
 							activation_data = t.funcSwish(pre_activation(r, c));
@@ -575,5 +586,6 @@ void Convolve::convolve3(vector<double>in)
 		}
 	}
 	featureMapData3.push_back(filter_summary);
+	inputbackprop1.push_back(ic_tkr1);
 }
 
