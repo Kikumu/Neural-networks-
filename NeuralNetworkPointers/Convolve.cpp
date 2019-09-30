@@ -304,11 +304,16 @@ void Convolve::convolve2(vector<double>in)
 	}
 	else 
 	{
-		//twelvw
-		data2.at(0) = saveFilter1;
-		data2.at(1) = saveFilter2;
-		data2.at(2) = saveFilter3;
-		data2.at(3) = saveFilter4;
+		
+		data2.at(datacounter1) = saveFilter1;
+		datacounter1++;
+		data2.at(datacounter1) = saveFilter2;
+		datacounter1++;
+		data2.at(datacounter1) = saveFilter3;
+		datacounter1++;
+		data2.at(datacounter1) = saveFilter4;
+		datacounter1++;
+
 		int k = 0;
 
 		for (int r = 0; r < 2; r++)
@@ -496,8 +501,11 @@ void Convolve::convolve3(vector<double>in)
 	}
 	else {
 		//24. loop through filter one and 2 separately
-		data3.at(0) = saveFilter1;
+		
+		data3.at(datacounter2) = saveFilter1;
+		datacounter2++;
 		data3.at(1) = saveFilter2;
+		datacounter2++;
 		int k = 0;
 
 		for (int r = 0; r < 2; r++)

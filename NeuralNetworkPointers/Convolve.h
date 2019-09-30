@@ -21,7 +21,8 @@ public:
 	vector<vector<double>>data1;
 	vector<vector<double>>data2;
 	vector<vector<double>>data3;
-
+	int datacounter1 = NULL;
+	int datacounter2 = NULL;
 	//double** convole1(double[][100]);
 private:
 

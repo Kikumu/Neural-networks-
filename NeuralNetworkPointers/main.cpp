@@ -52,7 +52,7 @@ int main(int argc, char** argv) {
 	double predictions[2];
 	predictions[0] = output.s1;
 	predictions[1] = output.s2;
-
+	//get rate of chage of filter which is baso the input
 	double label[2];
 	label[0] = 0.0;
 	label[1] = 1.0;
