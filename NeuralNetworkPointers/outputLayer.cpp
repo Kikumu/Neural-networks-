@@ -81,7 +81,7 @@ void outputLayer::calc1()
 	//48 WEIGHT TENSORS, YIKES
 	//WELL 48*4
 	//finally, summation
-
+	//vector<double>o_DataOut;
 	mt19937 generator;
 	generator.seed(time(0));
 	uniform_real_distribution<double>hue(0, 1);

@@ -9,12 +9,17 @@ public:
 	~outputLayer();
 
 	//each feature will have its own weight
-	vector<vector<double>>features;
+
+	vector<vector<double>>features; //use this for backprop
 	void calc();
 	void calc1();
 
 	double s1;
 	double s2;
+
+
+	//for back prop
+	//vector<vector<double>>outputBackpropData;
 private:
 
 };

@@ -73,9 +73,9 @@ int main(int argc, char** argv) {
     cout<< LayerFunc.costData.at(0);
 	cout << "\n";
 	cout << "\n";
-	cout << "Cost data derivative:";
+	/*cout << "Cost data derivative:";
 	cout << "\n";
-	cout << LayerFunc.costData.at(1);
+	cout << LayerFunc.costData.at(1);*/
 	k++;
 	//LayerFunc.counter = k;
 	//conv.counter1 = k;

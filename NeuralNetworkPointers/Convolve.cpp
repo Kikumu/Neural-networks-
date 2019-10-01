@@ -543,7 +543,7 @@ void Convolve::convolve3(vector<double>in)
 					//int z = 0;
 					for (int i = 0; i < 2; i++) {
 						for (int j = 0; j < 2; j++)
-							ic_tkr.push_back(inputChunk(i, j)); ////////////
+							ic_tkr.push_back(inputChunk(i, j)); ////////////in
 					}
 					pre_activation = inputChunk * FilterSize;
 					for (int r = 0; r < 2; r++) {
