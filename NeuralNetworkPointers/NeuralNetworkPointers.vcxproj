@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClInclude Include="Convolve.h" />
     <ClInclude Include="CostFunction.h" />
+    <ClInclude Include="Flatten.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LayerAvgPooling.h" />
     <ClInclude Include="LayerMaxPooling.h" />
@@ -136,6 +137,7 @@
     <ClCompile Include="..\..\..\RNG2\RNG2\RNG.cpp" />
     <ClCompile Include="Convolve.cpp" />
     <ClCompile Include="CostFunction.cpp" />
+    <ClCompile Include="Flatten.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="LayerAvgPooling.cpp" />
     <ClCompile Include="LayerMaxPooling.cpp" />

@@ -32,6 +32,11 @@ double Training::funcSwish(double n) //alternative to relu
 	return n / (1.0 + exp(-n));
 }
 
+double Training::funcSoftmax(double)
+{
+	return 0.0;
+}
+
 double Training::fncSigmoidDerivative(double n)
 {
 	double x = NULL;

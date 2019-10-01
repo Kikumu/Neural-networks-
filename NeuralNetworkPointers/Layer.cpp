@@ -145,12 +145,16 @@ void Layer::costRes(double totalNumberOfTrainingInputs, double inputs, double pr
 	//difference = actual_output - network_output;
 	difference = network_output - actual_output;
 	length = difference.squaredNorm();
-	double sum = 0;
+
+	/*double sum = 0;
 	for (int i = 0; i < inputs; i++)
 	{
 		sum += length;
 	}
 	costData1 = (1.0 / (2.0 * inputs)) * sum;
+	costData.push_back(costData1);*/
+
+	costData1 = (1.0 / (2.0 ))* length;
 	costData.push_back(costData1);
 }
 
