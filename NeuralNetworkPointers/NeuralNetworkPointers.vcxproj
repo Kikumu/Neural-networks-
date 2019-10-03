@@ -127,7 +127,6 @@
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LayerAvgPooling.h" />
     <ClInclude Include="LayerMaxPooling.h" />
-    <ClInclude Include="Matrix.h" />
     <ClInclude Include="outputLayer.h" />
     <ClInclude Include="RNG.h" />
     <ClInclude Include="Training.h" />
@@ -140,7 +139,6 @@
     <ClCompile Include="LayerAvgPooling.cpp" />
     <ClCompile Include="LayerMaxPooling.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="outputLayer.cpp" />
     <ClCompile Include="Training.cpp" />
   </ItemGroup>
