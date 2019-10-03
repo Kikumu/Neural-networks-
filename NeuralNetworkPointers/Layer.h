@@ -28,12 +28,15 @@ public:
 
 
 
-	void forwardPropagate(double**);
-	void forwardPropagate2(double**);
+	void forwardPropagate(vector<double>);
+	void forwardPropagate2(vector<double>);
+	void forwardPropagate3(vector<double>);
 	vector<double>Firstweight;
 	vector<double>SecondWeight;
+	vector<double>ThirdWeight;
 	vector<double>firstLayerData; //neurons
 	vector<double>secondLayerData; //neurons
+	vector<double>ThirdWeightData;
 	vector<double>costData;
 
 

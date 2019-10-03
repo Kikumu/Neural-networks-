@@ -29,12 +29,16 @@ double Training::funcSinc(double n)
 
 double Training::funcSwish(double n) //alternative to relu
 {
+	double x = NULL;
+	x = n / (1.0 + exp(-n));//for debug
 	return n / (1.0 + exp(-n));
 }
 
-double Training::funcSoftmax(double)
+void Training::funcSoftmax()
 {
-	return 0.0;
+
+	output_data1 = exp(softmaxVal_1) / (exp(softmaxVal_1) + exp(softmaxVal_2));
+	output_data2 = exp(softmaxVal_2)/ (exp(softmaxVal_2) + exp(softmaxVal_1));
 }
 
 double Training::fncSigmoidDerivative(double n)

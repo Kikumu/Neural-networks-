@@ -589,3 +589,15 @@ void Convolve::convolve3(vector<double>in)
 	inputbackprop1.push_back(ic_tkr1);
 }
 
+void Convolve::flatten()
+{
+		vector<double>itr;
+	for (int i = 0; i < featureMapData3.size(); i++)
+	{
+		itr = featureMapData3[i]; //save ech value in a vector
+		for (int j = 0; j < itr.size(); j++) {
+			Flattened_features.push_back(itr.at(j));
+		}
+	}
+}
+

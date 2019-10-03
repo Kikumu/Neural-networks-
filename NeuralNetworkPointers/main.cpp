@@ -13,7 +13,7 @@
 #include "Layer.h"
 #include "Convolve.h"
 #include "outputLayer.h"
-#include "Flatten.h"
+#include "CostFunction.h"
 
 using namespace std;
 using namespace cv;
@@ -21,9 +21,9 @@ using namespace cv;
 LayerMaxPooling maxpooling;
 Layer LayerFunc;
 Convolve conv;
-Flatten flat;
 outputLayer output;
-
+Training trn;
+CostFunction cst;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 
@@ -49,47 +49,37 @@ int main(int argc, char** argv) {
 	for (int i = 0; i < 12; i++)
 		conv.convolve3(maxpooling.pooledConv1[i]);
 
-	//flatten network
-	flat.flattenFeatures = conv.featureMapData3;
+	conv.flatten();
+	LayerFunc.forwardPropagate(conv.Flattened_features);
+	LayerFunc.forwardPropagate2(LayerFunc.firstLayerData);
+	LayerFunc.forwardPropagate3(LayerFunc.secondLayerData);
+	//probabilities
+	trn.softmaxVal_1 = LayerFunc.ThirdWeightData.at(0);
+	trn.softmaxVal_2 = LayerFunc.ThirdWeightData.at(1);
+	trn.funcSoftmax();
+	cst.network_output1.push_back(trn.output_data1);
+	cst.network_output1.push_back(trn.output_data2);
+   //LABEL
+	double label[2];
+	label[0] = 0.0;
+	label[1] = 1.0;
+	cst.actual_output1.push_back(label[0]);
+	cst.actual_output1.push_back(label[1]);
+	//PREDICTIONS
+	cout << "Predictions: ";
+	cout << "\n";
+	cout << trn.output_data1;
+	cout << "\n";
+	cout << trn.output_data2;
 
+	//COST
+	cout << "\n";
+	cout << "\n";
+	cst.costRes();
+	cout << "Cost: ";
+	cout << "\n";
+	cout << cst.costdat;
 
-
-
-
-	//output.features = conv.featureMapData3;
-	//output.calc();
-	//output.calc1();
-	//double predictions[2];
-	//predictions[0] = output.s1;
-	//predictions[1] = output.s2;
-	////get rate of chage of filter which is baso the input
-	//double label[2];
-	//label[0] = 0.0;
-	//label[1] = 1.0;
-
-	//LayerFunc.costRes(100.0, 10000.0, predictions, label);
-	//cout << "predictions:";
-	//cout << "\n";
-	//for (int i = 0; i < 2; i++) {
-	//	cout << predictions[i];
-	//	cout << "\n";
-	//}
-	///////////////////////////////////////////////////////////////////////////////not looping through data 2 and 3 properly during backprop
-	//cout << "\n";
-	//cout << "\n";
-	//cout << "Cost data:";
-	//cout << "\n";
- //   cout<< LayerFunc.costData.at(0);
-	//cout << "\n";
-	//cout << "\n";
-	///*cout << "Cost data derivative:";
-	//cout << "\n";
-	//cout << LayerFunc.costData.at(1);*/
-	//k++;
-	////LayerFunc.counter = k;
-	////conv.counter1 = k;
-	//conv.datacounter1 = 0;
-	//conv.datacounter2 = 0;
 	waitKey(0);
 	return 0;
 }

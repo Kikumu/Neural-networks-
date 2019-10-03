@@ -24,6 +24,9 @@ public:
 
 	vector<vector<double>>inputbackprop1; //for last layer
 	
+	vector<double>Flattened_features;
+
+	void flatten();
 
 
 

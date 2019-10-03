@@ -54,9 +54,6 @@
     <ClInclude Include="Convolve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Flatten.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -87,9 +84,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Convolve.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Flatten.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
