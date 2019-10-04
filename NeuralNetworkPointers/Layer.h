@@ -27,7 +27,7 @@ public:
 
 
 
-
+	//FOR FULLY CONNECTED LAYER
 	void forwardPropagate(vector<double>);
 	void forwardPropagate2(vector<double>);
 	void forwardPropagate3(vector<double>);

@@ -11,8 +11,8 @@ public:
 	//each feature will have its own weight
 
 	vector<vector<double>>features; //use this for backprop
-	void calc();
-	void calc1();
+	//void calc();
+	//void calc1();
 
 	double s1;
 	double s2;

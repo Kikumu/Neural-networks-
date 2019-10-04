@@ -17,6 +17,7 @@ public:
 	double funcSinc(double);
 	double funcSwish(double);
 	void funcSoftmax();
+
 	//derivative for back propagation
 	double fncSigmoidDerivative(double);
 	double funcSincDerivative(double);

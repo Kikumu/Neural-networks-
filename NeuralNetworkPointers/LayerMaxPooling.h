@@ -13,8 +13,6 @@ class LayerMaxPooling {
 public:
 	LayerMaxPooling();
 	~LayerMaxPooling();
-	double** resultant(double[][100]);
-	double** poolLayerby40(double**);
 	void poolConv(vector<double>);
 	void poolConv2(vector<double>);
 	vector<vector<double>>pooledConv;

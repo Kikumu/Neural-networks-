@@ -30,13 +30,8 @@ void Convolve::convole1(double i[][100])
 	Eigen::Matrix<double, 5, 5>FilterSize2; //weights
 	Eigen::Matrix<double, 5, 5>FilterSize3; //weights
 	Eigen::Matrix<double, 5, 5>inputChunk;
-	//Eigen::Matrix<double, 19, 19>activationMap; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap1; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap2; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap3; //feature map
 	Eigen::Matrix<double, 100, 100>input;
 	Eigen::Matrix<double, 5, 5>pre_activation;
-	//Eigen::Matrix<double, 25, 1>StretchedFilter;
 
 	for (int r = 0; r < 100; r++) {
 		for (int c = 0; c < 100; c++) {
@@ -243,13 +238,8 @@ void Convolve::convolve2(vector<double>in)
 	Eigen::Matrix<double, 2, 2>FilterSize2; //weights
 	Eigen::Matrix<double, 2, 2>FilterSize3; //weights
 	Eigen::Matrix<double, 2, 2>inputChunk;
-	//Eigen::Matrix<double, 19, 19>activationMap; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap1; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap2; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap3; //feature map
 	Eigen::Matrix<double, 15, 15>input;
 	Eigen::Matrix<double, 2, 2>pre_activation;
-	//Eigen::Matrix<double, 25, 1>StretchedFilter;
 
 	int k = 0;
 	for (int r = 0; r < 15; r++) {
@@ -460,13 +450,8 @@ void Convolve::convolve3(vector<double>in)
 	Eigen::Matrix<double, 2, 2>inputChunk;
 	vector<double>ic_tkr;
 	vector<double>ic_tkr1;
-	//Eigen::Matrix<double, 19, 19>activationMap; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap1; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap2; //feature map
-	//Eigen::Matrix<double, 19, 19>activationMap3; //feature map
 	Eigen::Matrix<double, 8, 8>input;
 	Eigen::Matrix<double, 2, 2>pre_activation;
-	//Eigen::Matrix<double, 25, 1>StretchedFilter;
 
 	int k = 0;
 	for (int r = 0; r < 8; r++) {

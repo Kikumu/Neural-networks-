@@ -11,7 +11,6 @@
 #include "LayerMaxPooling.h"
 #include "Layer.h"
 #include "Convolve.h"
-#include "outputLayer.h"
 #include "CostFunction.h"
 
 using namespace std;
@@ -86,7 +85,7 @@ int main(int argc, char** argv) {
 	cout << "Cost: ";
 	cout << "\n";
 	cout << cst.costdat;
-
+	trn.MeanSquaredError = cst.costdat;
 	waitKey(0);
 	return 0;
 }
