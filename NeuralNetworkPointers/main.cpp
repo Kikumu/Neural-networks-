@@ -68,6 +68,8 @@ int main(int argc, char** argv) {
 	double label[2];
 	label[0] = 0.0;
 	label[1] = 1.0;
+	trn.label_data.push_back(label[0]);
+	trn.label_data.push_back(label[1]);
 	cst.actual_output1.push_back(label[0]);
 	cst.actual_output1.push_back(label[1]);
 
@@ -82,10 +84,15 @@ int main(int argc, char** argv) {
 	cout << "\n";
 	cout << "\n";
 	cst.costRes();
+	trn.categorical_crossentropy();
 	cout << "Cost: ";
 	cout << "\n";
-	cout << cst.costdat;
+	//cout << cst.costdat;
+	cout << trn.categorical_crossentropy_value;
 	trn.MeanSquaredError = cst.costdat;
+	/*cout << "\n";
+	cout << cst.costdat;*/
+
 	waitKey(0);
 	return 0;
 }
