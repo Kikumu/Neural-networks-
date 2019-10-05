@@ -12,6 +12,7 @@ public:
 	double error;
 	double MeanSquaredError;
 	double categorical_crossentropy_value;
+
 	//Activation functions for forward propagation
 	double fncSigmoid(double);
 	double funcSinc(double);
@@ -34,7 +35,7 @@ public:
 	
 	//values for categorical crossentropy
 	vector<double>label_data;
-
+	vector<double>cross_derivative;
 
 	//loss
 	void categorical_crossentropy();

@@ -90,6 +90,7 @@ int main(int argc, char** argv) {
 	//cout << cst.costdat;
 	cout << trn.categorical_crossentropy_value;
 	trn.MeanSquaredError = cst.costdat;
+	trn.cross_entropy_derivative();
 	/*cout << "\n";
 	cout << cst.costdat;*/
 

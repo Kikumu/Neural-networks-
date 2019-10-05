@@ -67,6 +67,10 @@ double Training::funcSwishDerivative(double n)
 
 void Training::cross_entropy_derivative()
 {
+	double x = -1.0*((label_data.at(0) * (1.0/ output_data1))+(1.0 - label_data.at(0))*(1.0/(1.0 - output_data1)));
+	double y = -1.0* ((label_data.at(1) * (1.0 / output_data2)) + (1.0 - label_data.at(1)) * (1.0 / (1.0 - output_data2)));
+	cross_derivative.push_back(x);
+	cross_derivative.push_back(y);
 }
 
 void Training::categorical_crossentropy()
