@@ -2,7 +2,7 @@
 A simple ongoing build of a convoluted neural network
 
 
-**ROADMAP
+**ROADMAP**
 
 1)Initialization  **DONE**
 
