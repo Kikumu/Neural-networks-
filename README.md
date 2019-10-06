@@ -3,6 +3,7 @@ A simple ongoing build of a convoluted neural network
 
 
 ROADMAP
+
 1)Initialization  **DONE**
 
 2)Feed forward    **DONE**
