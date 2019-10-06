@@ -13,3 +13,5 @@ A simple ongoing build of a convoluted neural network
 4)output error    **DONE**
 
 5)Backward pass   
+
+6)Do README requirements file
