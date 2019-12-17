@@ -137,7 +137,7 @@ void Layer::forwardPropagate3(vector<double>i)
 			double dot = NULL;
 			//apply swish
 			dot = activationMap.dot(weights);
-			vals = traintype.funcSwish(dot);
+			vals = traintype.funcSinc(dot);
 			ThirdWeightData.push_back(vals);
 		}
 	}

@@ -24,6 +24,7 @@ public:
 	double funcSincDerivative(double);
 	double funcSwishDerivative(double);
 	void cross_entropy_derivative();
+	void softmax_derivative();
 
 	//softmax vals
 	double softmaxVal_1;
@@ -35,10 +36,15 @@ public:
 	
 	//values for categorical crossentropy
 	vector<double>label_data;
-	vector<double>cross_derivative;
+	//vector<double>cross_derivative;
+	vector<double>output_error;
 
 	//loss
 	void categorical_crossentropy();
+	void MSE();
+
+	//softmax derivative
+	vector<double>softmax_derivative_values;
 private:
 
 };

@@ -229,10 +229,7 @@ void Convolve::convolve2(vector<double>in)
 	int stride = 0;
 	double sum = 0.0;
 	double activation_data = 0.0;
-	vector<double>filter_summary; //save this to each filter map
-	vector<double>filter_summary1;
-	vector<double>filter_summary2;
-	vector<double>filter_summary3;
+	
 	Eigen::Matrix<double, 2, 2>FilterSize; //weights
 	Eigen::Matrix<double, 2, 2>FilterSize1; //weights
 	Eigen::Matrix<double, 2, 2>FilterSize2; //weights

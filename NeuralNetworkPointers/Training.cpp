@@ -69,8 +69,17 @@ void Training::cross_entropy_derivative()
 {
 	double x = -1.0*((label_data.at(0) * (1.0/ output_data1))+(1.0 - label_data.at(0))*(1.0/(1.0 - output_data1)));
 	double y = -1.0* ((label_data.at(1) * (1.0 / output_data2)) + (1.0 - label_data.at(1)) * (1.0 / (1.0 - output_data2)));
-	cross_derivative.push_back(x);
-	cross_derivative.push_back(y);
+	output_error.push_back(x);//output error 1
+	output_error.push_back(y);//output error 2
+}
+
+void Training::softmax_derivative()
+{
+	double x1 = (exp(softmaxVal_1) * exp(softmaxVal_2)) / pow((exp(softmaxVal_1) + exp(softmaxVal_2)), 2.0);
+	double x2 = (exp(softmaxVal_2) * exp(softmaxVal_2)) / pow((exp(softmaxVal_1) + exp(softmaxVal_2)), 2.0);
+
+	softmax_derivative_values.push_back(x1); //derivative of output with respect to input
+	softmax_derivative_values.push_back(x2); //derivative of output with respect to input
 }
 
 void Training::categorical_crossentropy()
@@ -80,5 +89,10 @@ void Training::categorical_crossentropy()
 	double x2 = ((label_data.at(1) * log(output_data2)) + ((1.0 - label_data.at(1) * log((1.0 - output_data2)))));*/
 	
 	double x1 = -(((label_data.at(0) * log(output_data1)) + ((1.0 - label_data.at(0) * log((1.0 - output_data1))))) + ((label_data.at(1) * log(output_data2)) + ((1.0 - label_data.at(1) * log((1.0 - output_data2))))));
-	categorical_crossentropy_value = x1;
+	categorical_crossentropy_value = x1; //error of entire network
+}
+
+void Training::MSE()
+{
+
 }

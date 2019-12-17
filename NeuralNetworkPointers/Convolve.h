@@ -22,13 +22,19 @@ public:
 	vector<vector<double>>data2;//weight data
 	vector<vector<double>>data3;//weight data
 
+	//to be used in conjuction with data for back propagation.
+	vector<double>filter_summary;
+	vector<double>filter_summary1;
+	vector<double>filter_summary2;
+	vector<double>filter_summary3;
+
 	vector<vector<double>>inputbackprop1; //for last layer
 	
 	vector<double>Flattened_features;
 
 	void flatten();
 
-
+	
 
 	int datacounter1 = NULL;
 	int datacounter2 = NULL;

@@ -55,7 +55,7 @@ int main(int argc, char** argv) {
 	conv.flatten();
 	LayerFunc.forwardPropagate(conv.Flattened_features);
 	LayerFunc.forwardPropagate2(LayerFunc.firstLayerData);
-	LayerFunc.forwardPropagate3(LayerFunc.secondLayerData);
+	LayerFunc.forwardPropagate3(LayerFunc.secondLayerData); //inputs
 
 	//probabilities
 	trn.softmaxVal_1 = LayerFunc.ThirdWeightData.at(0);
@@ -85,12 +85,14 @@ int main(int argc, char** argv) {
 	cout << "\n";
 	cst.costRes();
 	trn.categorical_crossentropy();
+	trn.MeanSquaredError = cst.costdat;
 	cout << "Cost: ";
 	cout << "\n";
-	//cout << cst.costdat;
-	cout << trn.categorical_crossentropy_value;
-	trn.MeanSquaredError = cst.costdat;
+	cout << cst.costdat;
+	//cout << trn.categorical_crossentropy_value;
+	
 	trn.cross_entropy_derivative();
+	trn.softmax_derivative();
 	/*cout << "\n";
 	cout << cst.costdat;*/
 

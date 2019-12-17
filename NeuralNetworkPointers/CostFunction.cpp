@@ -26,28 +26,14 @@ void CostFunction::costRes()
 		}
 	difference = actual_output - network_output;
 	length = difference.squaredNorm();
-	double sum = 0;
+	/*double sum = 0;
 	double inputs = 2.0;
 	for (int j = 0; j < 2; j++) {
 		sum += length;
-	}
-	costdat = (1.0 /(2.0*inputs))*sum;
+	}*/
+	//costdat = (1.0 /(2.0*inputs))*sum;
+	costdat = length;
 
 	//layer_func.costData.push_back(costData1);
 }
-
-//double CostFunction::costRes(int a , int b, double actual[2], double output[2])
-//{
-//	Eigen::Vector2d actual_output;  //gather from labelling but for now
-//	Eigen::Vector2d network_output;
-//	for (int i = 0; i < 2; i++) {
-//		network_output(i) = output[i]; //copied layer output to eigen
-//	}
-//
-//	//find out how to pin actual output to input
-//
-//	double cost = NULL;
-//	//cost = 1/a()
-//	return 0.0;
-//}
 

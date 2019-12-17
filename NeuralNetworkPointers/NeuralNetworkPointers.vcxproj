@@ -122,6 +122,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="BackPropagation.h" />
     <ClInclude Include="Convolve.h" />
     <ClInclude Include="CostFunction.h" />
     <ClInclude Include="Layer.h" />
@@ -134,6 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\RNG2\RNG2\RNG.cpp" />
+    <ClCompile Include="BackPropagation.cpp" />
     <ClCompile Include="Convolve.cpp" />
     <ClCompile Include="CostFunction.cpp" />
     <ClCompile Include="Layer.cpp" />
