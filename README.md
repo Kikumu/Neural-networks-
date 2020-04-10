@@ -1,5 +1,5 @@
 # Neural-networks-
-A simple ongoing build of a convolutional neural network
+An ongoing build of a convolutional neural network in c++ 
 
 **ROADMAP**
 
