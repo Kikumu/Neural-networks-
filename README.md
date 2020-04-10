@@ -1,6 +1,5 @@
 # Neural-networks-
-A simple ongoing build of a convoluted neural network
-
+A simple ongoing build of a convolutional neural network
 
 **ROADMAP**
 
@@ -14,4 +13,12 @@ A simple ongoing build of a convoluted neural network
 
 5)Backward pass   
 
-6)Do README requirements file
+
+# Requirements
+Eigen download for tensor processing which can be found here: http://eigen.tuxfamily.org/index.php?title=Main_Page
+Opencv installation for c++ found here: https://opencv.org/releases/
+
+# Linking OpenCV to visual studio
+Installation of OpenCV can be found here: https://www.deciphertechnic.com/install-opencv-with-visual-studio/
+
+
