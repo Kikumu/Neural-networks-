@@ -83,10 +83,10 @@ void Convolve::convole1(double i[][100])
 		data1.push_back(saveFilter4);
 	}
 	else {
-			data1.at(0) = saveFilter1;
-			data1.at(1) = saveFilter2;
-			data1.at(2) = saveFilter3;
-			data1.at(3) = saveFilter4;
+			saveFilter1 = data1.at(0);
+			saveFilter2 = data1.at(1);
+			saveFilter3 = data1.at(2);
+			saveFilter4 = data1.at(3);
 			int k = 0;
 
 			for (int r = 0; r < 5; r++)
@@ -127,10 +127,6 @@ void Convolve::convole1(double i[][100])
 			
 	}
 	
-
-	/*FilterSize1 = 2 * FilterSize1;
-	FilterSize2 = 3 * FilterSize2;
-	FilterSize3 = 4 * FilterSize3;*/
 
 	//feature 1
 	for (int r = 0; r < 100; r++) {
@@ -292,14 +288,15 @@ void Convolve::convolve2(vector<double>in)
 	else 
 	{
 		
-		data2.at(datacounter1) = saveFilter1;
-		datacounter1++;
-		data2.at(datacounter1) = saveFilter2;
-		datacounter1++;
-		data2.at(datacounter1) = saveFilter3;
-		datacounter1++;
-		data2.at(datacounter1) = saveFilter4;
-		datacounter1++;
+		saveFilter1 = data2.at(0);
+		saveFilter2 = data2.at(1) ;
+		saveFilter3 = data2.at(2);
+		saveFilter4 = data2.at(3);
+		
+
+
+
+
 
 		int k = 0;
 
@@ -486,10 +483,10 @@ void Convolve::convolve3(vector<double>in)
 	else {
 		//24. loop through filter one and 2 separately
 		
-		data3.at(datacounter2) = saveFilter1;
-		datacounter2++;
-		data3.at(1) = saveFilter2;
-		datacounter2++;
+		saveFilter1 = data3.at(0);
+		
+		saveFilter2 = data3.at(1);
+		
 		int k = 0;
 
 		for (int r = 0; r < 2; r++)

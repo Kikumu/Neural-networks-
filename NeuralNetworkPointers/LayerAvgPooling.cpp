@@ -34,6 +34,7 @@ double** LayerAvgPooling::resultant(double input[][100])
 			}
 		}
 	}
+
 	int k = 0;
 	convdat = new double* [60];
 	for (int r = 0; r < 60; r++) {

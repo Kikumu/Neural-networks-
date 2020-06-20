@@ -19,8 +19,8 @@ public:
 
 	//for back prop(last layer only)
 	vector<vector<double>>data1; //weight data
-	vector<vector<double>>data2;//weight data
-	vector<vector<double>>data3;//weight data
+	vector<vector<double>>data2;//weight data (size 12 2 by 2)
+	vector<vector<double>>data3;//weight data(size 24 2 by 2)
 
 	//to be used in conjuction with data for back propagation.
 	vector<double>filter_summary;

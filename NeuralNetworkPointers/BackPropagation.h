@@ -21,9 +21,9 @@ public:
 	vector<vector<double>>updated_data3;//weight data
 
 	//layer update functions
-	void update_layer1();
-	void update_layer2();
-	void update_layer3();
+	void update_layer1(double learning_rate, vector<vector<double>>updated_data1);
+	void update_layer2(double learning_rate, vector<vector<double>>updated_data1);
+	void update_layer3(double learning_rate, vector<vector<double>>updated_data1);
 
 private:
 

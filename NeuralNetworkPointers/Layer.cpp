@@ -7,18 +7,17 @@
 
 Training traintype;
 using namespace std;
+
 Layer::Layer(int i, int h):number_of_inputs_size(i),number_of_output_size(h) {
 	number_of_inputs_size = NULL;
 	number_of_output_size = NULL;
 }
-
 
 Layer::Layer()
 {
 	number_of_inputs_size = NULL;
 	number_of_output_size = NULL;
 }
-
 
 Layer::~Layer()
 {
@@ -49,16 +48,15 @@ void Layer::forwardPropagate(vector<double>i)
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
 	if (Firstweight.size() < 1) {
+									
 		for (int k = 0; k < 150; k++) {
-
-
+									
 			for (int i = 0; i < 94; i++) //vector of 94
 			{
 				weights(i, 0) = (random = hue(generator)) / 94;
 				//Firstweight.push_back(random = hue(generator));
 				Firstweight.push_back(weights(i, 0));
 			}
-
 
 			for (int r = 0; r < 94; r++)
 			{
@@ -72,9 +70,20 @@ void Layer::forwardPropagate(vector<double>i)
 			vals = traintype.funcSwish(dot);
 			firstLayerData.push_back(vals);
 		}
-
+		
 		//double** propagateData = NULL;
 	}
+	else {
+
+
+
+		//std::cout << "out";
+		//dot = activationMap.dot(weights);
+		//vals = traintype.funcSwish(dot);
+		//firstLayerData.push_back(vals);
+
+	}
+
 }
 
 void Layer::forwardPropagate2(vector<double>i)
@@ -127,7 +136,6 @@ void Layer::forwardPropagate3(vector<double>i)
 				weights(j, 0) = (random = hue(generator)) / 84;
 				ThirdWeight.push_back(weights(j, 0));
 			}
-
 			for (int r = 0; r < 84; r++)
 			{
 				activationMap(r, 0) = i[r];

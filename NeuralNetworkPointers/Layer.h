@@ -26,7 +26,6 @@ public:
 
 
 
-
 	//FOR FULLY CONNECTED LAYER
 	void forwardPropagate(vector<double>);
 	void forwardPropagate2(vector<double>);
@@ -38,7 +37,6 @@ public:
 	vector<double>secondLayerData; //neurons
 	vector<double>ThirdWeightData;
 	vector<double>costData;
-
 
 	//layer 1 data, layer 2 data.....layer n data
 
