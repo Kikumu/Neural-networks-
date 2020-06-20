@@ -148,6 +148,7 @@ void Convolve::convolve2(vector<double>in)
 	Eigen::Matrix<double, 15, 15>input;
 	Eigen::Matrix<double, 2, 2>pre_activation;
 
+	//CONVERT INPUT VECTOR BACK TO MATRIX
 	int k = 0;
 	for (int r = 0; r < 15; r++) {
 		for (int c = 0; c < 15; c++) {
@@ -165,7 +166,8 @@ void Convolve::convolve2(vector<double>in)
 	vector<double>saveFilter3;
 	vector<double>saveFilter4;
 
-	if (data2.size() != 12) {
+	if (data2.size() == 0) {
+		//WEIGHT INITIALIZATION
 		for (int r = 0; r < 2; r++)
 		{
 			for (int c = 0; c < 2; c++) {
@@ -199,145 +201,55 @@ void Convolve::convolve2(vector<double>in)
 		}
 		data2.push_back(saveFilter4);
 	}
-	else 
-	{
-		
-		saveFilter1 = data2.at(0);
-		saveFilter2 = data2.at(1) ;
-		saveFilter3 = data2.at(2);
-		saveFilter4 = data2.at(3);
+	//FORWARD PROPAGATION
 
-		int k = 0;
-
-		for (int r = 0; r < 2; r++)
-		{
-			for (int c = 0; c < 2; c++) {
-				FilterSize(r, c) = saveFilter1.at(k);
-				++k;
-			}
-		}
-
-		k = 0;
-		for (int r = 0; r < 2; r++)
-		{
-			for (int c = 0; c < 2; c++) {
-				FilterSize1(r, c) = saveFilter2.at(k);
-				++k;
-			}
-		}
-
-		k = 0;
-		for (int r = 0; r < 2; r++)
-		{
-			for (int c = 0; c < 2; c++) {
-				FilterSize2(r, c) = saveFilter3.at(k);
-				++k;
-			}
-		}
-
-		k = 0;
-		for (int r = 0; r < 2; r++)
-		{
-			for (int c = 0; c < 2; c++) {
-				FilterSize3(r, c) = saveFilter4.at(k);
-				++k;
-			}
-		}
-		k = 0;
-
-	}
-	
-	//f1
-	for (int r = 0; r < 15; r++) {
-		if (r < 13) {
-			//r += stride;
-			for (int c = 0; c < 15; c++) {
-				if (c < 13) {
-					//c += stride;
-					inputChunk = input.block(r, c, 2, 2);
-					pre_activation = inputChunk * FilterSize;
-					for (int r = 0; r < 2; r++) {
-						for (int c = 0; c < 2; c++) {
-							activation_data = t.funcSwish(pre_activation(r, c));
-							sum += activation_data;
+	int feature_counter = 0;
+	while (feature_counter < 4) {
+		//SET TO 15 TO MATCH INPUT SIZE
+		for (int r = 0; r < 15; r++) {
+			//SET TO 13 FOR THRESHHOLDING AND AVOIDING MATRIX SIZE MISMATCHES
+			if (r < 13) {
+				//r += stride;
+				for (int c = 0; c < 15; c++) {
+					if (c < 13) {
+						//c += stride;
+						inputChunk = input.block(r, c, 2, 2);
+						saveFilter1 = data2.at(feature_counter);
+						int k = 0;
+						for (int r = 0; r < 2; r++)
+						{
+							for (int c = 0; c < 2; c++) {
+								FilterSize(r, c) = saveFilter1.at(k);
+								++k;
+							}
 						}
-					}
-					filter_summary.push_back(sum);
-				}
-				sum = 0.0;
-			}
-		}
-	}
-	featureMapData2.push_back(filter_summary);
-
-	//f2
-	for (int r = 0; r < 15; r++) {
-		if (r < 13) {
-			//r += stride;
-			for (int c = 0; c < 15; c++) {
-				if (c < 13) {
-					//c += stride;
-					inputChunk = input.block(r, c, 2, 2);
-					pre_activation = inputChunk * FilterSize1;
-					for (int r = 0; r < 2; r++) {
-						for (int c = 0; c < 2; c++) {
-							activation_data = t.funcSwish(pre_activation(r, c));
-							sum += activation_data;
+						k = 0;
+						pre_activation = inputChunk * FilterSize;
+						for (int r = 0; r < 2; r++) {
+							for (int c = 0; c < 2; c++) {
+								activation_data = t.funcSwish(pre_activation(r, c)); //ACTIVATION FUNCTION(SEE TRAINING.CPP FOR MORE OPTIONS)
+								sum += activation_data;
+							}
 						}
+						if (feature_counter == 0)
+							filter_summary.push_back(sum);
+						else if (feature_counter == 1)
+							filter_summary1.push_back(sum);
+						else if (feature_counter == 2)
+							filter_summary2.push_back(sum);
+						else if (feature_counter == 3)
+							filter_summary3.push_back(sum);
 					}
-					filter_summary1.push_back(sum);
+					sum = 0.0;
 				}
-				sum = 0.0;
 			}
 		}
+		if (feature_counter == 0)featureMapData2.push_back(filter_summary);
+		else if (feature_counter == 1)featureMapData2.push_back(filter_summary1);
+		else if (feature_counter == 2)featureMapData2.push_back(filter_summary2);
+		else if (feature_counter == 3)featureMapData2.push_back(filter_summary3);
+		feature_counter++;
 	}
-	featureMapData2.push_back(filter_summary1);
-
-	//f3
-	for (int r = 0; r < 15; r++) {
-		if (r < 13) {
-			//r += stride;
-			for (int c = 0; c < 15; c++) {
-				if (c < 13) {
-					//c += stride;
-					inputChunk = input.block(r, c, 2, 2);
-					pre_activation = inputChunk * FilterSize2;
-					for (int r = 0; r < 2; r++) {
-						for (int c = 0; c < 2; c++) {
-							activation_data = t.funcSwish(pre_activation(r, c));
-							sum += activation_data;
-						}
-					}
-					filter_summary2.push_back(sum);
-				}
-				sum = 0.0;
-			}
-		}
-	}
-	featureMapData2.push_back(filter_summary2);
-
-	//f4
-	for (int r = 0; r < 15; r++) {
-		if (r < 13) {
-			//r += stride;
-			for (int c = 0; c < 15; c++) {
-				if (c < 13) {
-					//c += stride;
-					inputChunk = input.block(r, c, 2, 2);
-					pre_activation = inputChunk * FilterSize3;
-					for (int r = 0; r < 2; r++) {
-						for (int c = 0; c < 2; c++) {
-							activation_data = t.funcSwish(pre_activation(r, c));
-							sum += activation_data;
-						}
-					}
-					filter_summary3.push_back(sum);
-				}
-				sum = 0.0;
-			}
-		}
-	}
-	featureMapData2.push_back(filter_summary3);
 }
 
 void Convolve::convolve3(vector<double>in)
@@ -371,7 +283,7 @@ void Convolve::convolve3(vector<double>in)
 	vector<double>saveFilter1;
 	vector<double>saveFilter2;
 
-	if (data3.size() != 24) {
+	if (data3.size() == 0) {
 		for (int r = 0; r < 2; r++)
 		{
 			for (int c = 0; c < 2; c++) {

@@ -21,15 +21,18 @@ void LayerMaxPooling::poolConv(vector<double> e)
 	vector<double>maxNumberStore;
 	Eigen::Matrix<double, 5, 5>filter;
 
+	//INPUT VECTOR MUST BE CONVERTED BACK TO EIGEN MATRIX TO BE WORKED ON SO OUR INPUT IS NOW INPUT TENSOR
 	int k = 0;
 	for (int i = 0; i != 19; i++) {
 		for (int j = 0; j != 19; j++) {
-			inputTensor(i, j) = e[k]; //matrix for takin in input
+			inputTensor(i, j) = e[k]; 
 			++k;
 		}
 	}
 
+	//MAX VALUE IS FOUND PER 5 BY 5 BLOCK FILTER
 	for (int r = 0; r < 19; r++) {
+		//LIMITED TO 15 FOR PADDING PURPOSES TO AVOID MATRIX SIZE MISMATCH
 		if (r < 15) {
 			for (int c = 0; c < 19; c++) {
 				if (c < 15) {
@@ -39,6 +42,7 @@ void LayerMaxPooling::poolConv(vector<double> e)
 			}
 		}
 	}
+	//RETURNED IN THE FORM OF A VECTOR
 	pooledConv.push_back(maxNumberStore);
 }
 
@@ -48,6 +52,7 @@ void LayerMaxPooling::poolConv2(vector<double>e)
 	vector<double>maxNumberStore;
 	Eigen::Matrix<double, 5, 5>filter;
 
+	//VECTOR HAS TO BE RECONVERTED BACK TO A MATRIX
 	int k = 0;
 	for (int i = 0; i != 13; i++) {
 		for (int j = 0; j != 13; j++) {
