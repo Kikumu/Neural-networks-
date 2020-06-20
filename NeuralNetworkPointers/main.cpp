@@ -45,11 +45,11 @@ int main(int argc, char** argv) {
 		}
 
 		//CONVOLUTIONS AND MAXPOOLING(to match feature map size)
-		conv.convole1(darray);
+		conv.convole1(darray); //retouched
 		for (int i = 0; i < 3; i++)
-			maxpooling.poolConv(conv.featureMapData1[i]);
+			maxpooling.poolConv(conv.featureMapData1[i]); //retouched
 		for (int i = 0; i < 3; i++)
-			conv.convolve2(maxpooling.pooledConv[i]);
+			conv.convolve2(maxpooling.pooledConv[i]); 
 		for (int i = 0; i < 12; i++)
 			maxpooling.poolConv2(conv.featureMapData2[i]);
 		for (int i = 0; i < 12; i++)
