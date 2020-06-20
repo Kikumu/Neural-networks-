@@ -1,0 +1,22 @@
+﻿  RNG.cpp
+c1xx : fatal error C1083: Cannot open source file: '..\..\..\RNG2\RNG2\RNG.cpp': No such file or directory
+  BackPropagation.cpp
+D:\vs\VC\Tools\MSVC\14.25.28610\include\yvals.h(12,10): fatal error C1083: Cannot open include file: 'crtdbg.h': No such file or directory
+  Convolve.cpp
+D:\vs\VC\Tools\MSVC\14.25.28610\include\yvals.h(12,10): fatal error C1083: Cannot open include file: 'crtdbg.h': No such file or directory
+  CostFunction.cpp
+D:\vs\VC\Tools\MSVC\14.25.28610\include\yvals.h(12,10): fatal error C1083: Cannot open include file: 'crtdbg.h': No such file or directory
+  Layer.cpp
+D:\vs\VC\Tools\MSVC\14.25.28610\include\yvals.h(12,10): fatal error C1083: Cannot open include file: 'crtdbg.h': No such file or directory
+  LayerAvgPooling.cpp
+D:\github repository\Neural-networks-\NeuralNetworkPointers\LayerAvgPooling.cpp(2,10): fatal error C1083: Cannot open include file: 'Eigen/Core': No such file or directory
+  LayerMaxPooling.cpp
+D:\github repository\Neural-networks-\NeuralNetworkPointers\LayerMaxPooling.h(2,10): fatal error C1083: Cannot open include file: 'Eigen/Core': No such file or directory
+  main.cpp
+D:\vs\VC\Tools\MSVC\14.25.28610\include\yvals.h(12,10): fatal error C1083: Cannot open include file: 'crtdbg.h': No such file or directory
+  optimizers.cpp
+  outputLayer.cpp
+D:\vs\VC\Tools\MSVC\14.25.28610\include\yvals.h(12,10): fatal error C1083: Cannot open include file: 'crtdbg.h': No such file or directory
+  Training.cpp
+D:\vs\VC\Tools\MSVC\14.25.28610\include\yvals.h(12,10): fatal error C1083: Cannot open include file: 'crtdbg.h': No such file or directory
+  Generating Code...
