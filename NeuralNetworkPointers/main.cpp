@@ -22,6 +22,8 @@ Convolve conv;
 outputLayer output;
 Training trn;
 CostFunction cst;
+
+const double learning_rate = 0.5;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 

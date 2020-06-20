@@ -48,9 +48,6 @@
     <ClInclude Include="CostFunction.h">
       <Filter>Output</Filter>
     </ClInclude>
-    <ClInclude Include="RNG.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Convolve.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -82,9 +79,6 @@
     </ClCompile>
     <ClCompile Include="CostFunction.cpp">
       <Filter>Output</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\RNG2\RNG2\RNG.cpp">
-      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Convolve.cpp">
       <Filter>Source Files</Filter>

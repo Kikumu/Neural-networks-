@@ -1,6 +1,7 @@
 #include "Training.h"
 #include <cstdlib>
 
+//contains all activation functions with their derivarives
 Training::Training()
 {
 	epochs = NULL;

@@ -84,7 +84,8 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Libraries\Eigen;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Windows Kits\10\Include\10.0.10240.0\ucrt;D:\Libraries\eigen;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>D:\opencv\build\x64\vc15\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
@@ -99,7 +100,6 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\Libraries\eigen;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -131,11 +131,9 @@
     <ClInclude Include="LayerMaxPooling.h" />
     <ClInclude Include="optimizers.h" />
     <ClInclude Include="outputLayer.h" />
-    <ClInclude Include="RNG.h" />
     <ClInclude Include="Training.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\RNG2\RNG2\RNG.cpp" />
     <ClCompile Include="BackPropagation.cpp" />
     <ClCompile Include="Convolve.cpp" />
     <ClCompile Include="CostFunction.cpp" />
