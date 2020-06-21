@@ -99,12 +99,12 @@ int main(int argc, char** argv) {
 
 		trn.cross_entropy_derivative();
 		trn.softmax_derivative();
-		/*cout << "\n";
-		cout << cst.costdat;*/
 
 
 		waitKey(0);
-		
+		//BACK PROPAGATION
+		//THOUGHT SKELETON: GRAB ALL WEIGHT DATA, COMPUTE DERIVATIVES
+
 		epochs++;
 	}
 	return 0;
