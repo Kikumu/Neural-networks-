@@ -80,9 +80,11 @@ int main(int argc, char** argv) {
 		//PREDICTIONS
 		cout << "Predictions: ";
 		cout << "\n";
-		cout << trn.output_data1;
+		cout << (trn.output_data1) * 100;
+		cout << "% sure its a cat";
 		cout << "\n";
-		cout << trn.output_data2;
+		cout << (trn.output_data2)*100;
+		cout << "% sure its a dog";
 
 		//COST
 		cout << "\n";

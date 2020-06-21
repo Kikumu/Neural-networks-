@@ -91,41 +91,57 @@ void Layer::forwardPropagate(vector<double>i)
 
 void Layer::forwardPropagate2(vector<double>i)
 {
-	Eigen::Matrix<double, 100, 1>weights;
+	Eigen::Matrix<double, 100, 1>weights;      //holds all weight data
 	Eigen::Matrix<double, 10, 1>activationMap; //input from previous data layer
-	
-
+	double dot;
+	double vals;
 	mt19937 generator;
 	generator.seed(time(0));
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
 	if (SecondWeight.size() < 1) {
-		for (int k = 0; k < 84; k++) //vector of 60
-		{
-			for (int j = 0; j < 150; j++) {
-				weights(j, 0) = (random = hue(generator)) / 150;
+		//WEIGHT INITIALIZATION
+		
+			for (int j = 0; j < 100; j++) {
+				weights(j, 0) = (random = hue(generator)) / 10; //divide b number of inputs to scale properly
 				SecondWeight.push_back(weights(j, 0));
 			}
-	
-			for (int r = 0; r < 150; r++)
-			{
-				activationMap(r, 0) = i[r];
-			}
-
-			double vals = NULL;
-			double dot = NULL;
-			//apply swish
-			dot = activationMap.dot(weights);
-			vals = traintype.funcSwish(dot);
-			secondLayerData.push_back(vals);
+	}
+	//INPUT DATA GRAB
+	for (int r = 0; r < 10; r++)
+	{
+		activationMap(r, 0) = i[r];
+	}
+	//PROPAGATION
+	int limiter = 0;
+	int counter = 0;
+	while (limiter < 10) {
+		Eigen::Matrix<double, 10, 1>temp_weights;
+		int j = 0;
+		while (counter < 100) {
+			temp_weights(j, 0) = weights(counter, 0);
+			if (counter == 9)
+				break;
+			else if (counter > 9 && counter % 10 == 0)
+				break;
+			counter++;
+			j++;
 		}
+		//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+		counter++;
+		//DOT PRODUCT
+		dot = activationMap.dot(temp_weights);
+		//ACTIVATION
+		vals = traintype.funcSwish(dot);
+		secondLayerData.push_back(vals);
+		limiter++;
 	}
 }
 
 void Layer::forwardPropagate3(vector<double>i)
 {
-	Eigen::Matrix<double, 84, 1>weights;
-	Eigen::Matrix<double, 84, 1>activationMap; //150 batches of these(each unique)
+	Eigen::Matrix<double, 20, 1>weights;
+	Eigen::Matrix<double, 10, 1>activationMap; //150 batches of these(each unique)
 	//create a vector of weights to multiply activation map with; since conv is 60 by 60
 
 	mt19937 generator;
@@ -133,24 +149,44 @@ void Layer::forwardPropagate3(vector<double>i)
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
 	if (ThirdWeight.size() < 1) {
-		for (int k = 0; k < 2; k++) //vector of 60
-		{
-			for (int j = 0; j < 84; j++) {
-				weights(j, 0) = (random = hue(generator)) / 84;
+		//WEIGHT INITIALIZATION
+			for (int j = 0; j < 20; j++) {
+				weights(j, 0) = (random = hue(generator)) / 10;
 				ThirdWeight.push_back(weights(j, 0));
 			}
-			for (int r = 0; r < 84; r++)
-			{
-				activationMap(r, 0) = i[r];
-			}
+	}
 
-			double vals = NULL;
-			double dot = NULL;
-			//apply swish
-			dot = activationMap.dot(weights);
-			vals = traintype.funcSinc(dot);
-			ThirdWeightData.push_back(vals);
+	double vals = NULL;
+	double dot = NULL;
+	//PREVIOUS LAYER DATA
+	for (int r = 0; r < 10; r++)
+	{
+		activationMap(r, 0) = i[r];
+	}
+
+	//PROPAGATION
+	int limiter = 0;
+	int counter = 0;
+	while (limiter < 2) {
+		Eigen::Matrix<double, 10, 1>temp_weights;
+		int j = 0;
+		while (counter < 20) {
+			temp_weights(j, 0) = weights(counter, 0);
+			if (counter == 9)
+				break;
+			else if (counter > 9 && counter % 10 == 0)
+				break;
+			counter++;
+			j++;
 		}
+		//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+		counter++;
+		//DOT PRODUCT
+		dot = activationMap.dot(temp_weights);
+		//ACTIVATION
+		vals = traintype.funcSwish(dot);
+		ThirdWeightData.push_back(vals);
+		limiter++;
 	}
 }
 
