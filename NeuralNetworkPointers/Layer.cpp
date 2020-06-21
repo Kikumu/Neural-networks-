@@ -37,60 +37,63 @@ int Layer::getOutputSize()
 void Layer::forwardPropagate(vector<double>i)
 {
 	//create a vector of weights to multiply activation map with; since conv is 60 by 60
-	Eigen::Matrix<double, 94, 1>weights;
-	Eigen::Matrix<double, 94, 1>activationMap; //150 batches of these(each unique)
-	//Eigen::Matrix<double, 94, 1>layerValues; //aka neurons
-	//Eigen::VectorXd
-	double dot;
+	Eigen::Matrix<double, 1280, 1>weights;
+	Eigen::Matrix<double, 128, 1>activationMap; //Data from flattened layer
+	
+	double dot; //dot product per push
 
 	mt19937 generator;
 	generator.seed(time(0));
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
 	if (Firstweight.size() < 1) {
-									
-		for (int k = 0; k < 150; k++) {
-									
-			for (int i = 0; i < 94; i++) //vector of 94
+		//weight initialization set to 1280. (cause 10 neurons in layer since flatenned layer contains 128 values)
+			for (int i = 0; i < 1280; i++) //vector of 94
 			{
-				weights(i, 0) = (random = hue(generator)) / 94;
+				weights(i, 0) = (random = hue(generator)) / 128;
 				//Firstweight.push_back(random = hue(generator));
 				Firstweight.push_back(weights(i, 0));
 			}
+	}
 
-			for (int r = 0; r < 94; r++)
-			{
-				activationMap(r, 0) = i[r];
-			}
-			double vals = NULL;
+	//GETS INPUTS FROM CONV FLATTENED LAYER
+	for (int r = 0; r < 128; r++)
+	{
+		activationMap(r, 0) = i[r];
+	}
+	double vals = NULL;
 
-			//propagate
-			//layerValues = activationMap * weights;
-			dot = activationMap.dot(weights);
-			vals = traintype.funcSwish(dot);
-			firstLayerData.push_back(vals);
+	//propagate
+	int limiter = 0;
+	int counter = 0;
+	while (limiter < 10) {
+		Eigen::Matrix<double, 128, 1>temp_weights;
+		int j = 0;
+		while (counter < 1280) {
+			temp_weights(j, 0) = weights(counter, 0);
+			if (counter == 127)
+				break;
+			else if (counter > 126 && counter % 127 == 0)
+				break;
+			counter++;
+			j++;
 		}
-		
-		//double** propagateData = NULL;
+		//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+		counter++;
+		//DOT PRODUCT
+		dot = activationMap.dot(temp_weights);
+		//ACTIVATION
+		vals = traintype.funcSwish(dot);
+		firstLayerData.push_back(vals);
+		limiter++;
 	}
-	else {
-
-
-
-		//std::cout << "out";
-		//dot = activationMap.dot(weights);
-		//vals = traintype.funcSwish(dot);
-		//firstLayerData.push_back(vals);
-
-	}
-
 }
 
 void Layer::forwardPropagate2(vector<double>i)
 {
-	Eigen::Matrix<double, 150, 1>weights;
-	Eigen::Matrix<double, 150, 1>activationMap; //150 batches of these(each unique)
-	//create a vector of weights to multiply activation map with; since conv is 60 by 60
+	Eigen::Matrix<double, 100, 1>weights;
+	Eigen::Matrix<double, 10, 1>activationMap; //input from previous data layer
+	
 
 	mt19937 generator;
 	generator.seed(time(0));
