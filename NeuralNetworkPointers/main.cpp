@@ -24,14 +24,14 @@ outputLayer output;
 Training trn;
 CostFunction cst;
 
-const double learning_rate = 0.6;
+const double learning_rate = 0.2;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 	int epochs = 0;
 	LayerFunc.learning_rate = learning_rate;
 
 
-	while (epochs < 5) {
+	while (epochs < 50) {
 		int k = 0;
 		//im starting with kaggle cats and dogs for c++
 		Mat img_gray;
@@ -85,11 +85,11 @@ int main(int argc, char** argv) {
 		cout << "\n";
 		//cout << (trn.output_data1) * 100;
 		cout << (trn.output_data1);
-		cout << "% sure its a dog";
+		cout << "% sure its a cat";
 		cout << "\n";
 		//cout << (trn.output_data2)*100;
 		cout << (trn.output_data2);
-		cout << "% sure its a cat";
+		cout << "% sure its a dog";
 
 		//COST
 		cout << "\n";

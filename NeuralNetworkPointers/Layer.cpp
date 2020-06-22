@@ -114,8 +114,34 @@ void Layer::forwardPropagate2(vector<double>i)
 		for (int j = 0; j < 100; j++) {
 			weights(j, 0) = SecondWeight[j];
 		}
+		//PROPAGATION
+		int limiter = 0;
+		int counter = 0;
+		while (limiter < 10) {
+			Eigen::Matrix<double, 10, 1>temp_weights;
+			int j = 0;
+			while (counter < 100) {
+				temp_weights(j, 0) = weights(counter, 0);
+				if (counter == 9)
+					break;
+				else if (counter > 9 && counter % 10 == 0)
+					break;
+				counter++;
+				j++;
+			}
+			//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+			counter++;
+			//DOT PRODUCT
+			dot = activationMap.dot(temp_weights);
+			//ACTIVATION
+			vals = traintype.fncSigmoid(dot);
+			///secondLayerData.push_back(vals);
+			secondLayerData[limiter] = vals;
+			limiter++;
+		}
 	}
 
+	//THIS CONDITION IS ONLY FOR FIRST PASS
 	if (SecondWeight.size() < 1) {
 		//WEIGHT INITIALIZATION
 		
@@ -124,32 +150,30 @@ void Layer::forwardPropagate2(vector<double>i)
 				SecondWeight.push_back(weights(j, 0));
 			}
 
-
-	}
-	
-	//PROPAGATION
-	int limiter = 0;
-	int counter = 0;
-	while (limiter < 10) {
-		Eigen::Matrix<double, 10, 1>temp_weights;
-		int j = 0;
-		while (counter < 100) {
-			temp_weights(j, 0) = weights(counter, 0);
-			if (counter == 9)
-				break;
-			else if (counter > 9 && counter % 10 == 0)
-				break;
-			counter++;
-			j++;
-		}
-		//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
-		counter++;
-		//DOT PRODUCT
-		dot = activationMap.dot(temp_weights);
-		//ACTIVATION
-		vals = traintype.fncSigmoid(dot);
-		secondLayerData.push_back(vals);
-		limiter++;
+			//PROPAGATION
+			int limiter = 0;
+			int counter = 0;
+			while (limiter < 10) {
+				Eigen::Matrix<double, 10, 1>temp_weights;
+				int j = 0;
+				while (counter < 100) {
+					temp_weights(j, 0) = weights(counter, 0);
+					if (counter == 9)
+						break;
+					else if (counter > 9 && counter % 10 == 0)
+						break;
+					counter++;
+					j++;
+				}
+				//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+				counter++;
+				//DOT PRODUCT
+				dot = activationMap.dot(temp_weights);
+				//ACTIVATION
+				vals = traintype.fncSigmoid(dot);
+				secondLayerData.push_back(vals);
+				limiter++;
+			}
 	}
 }
 
@@ -164,52 +188,85 @@ void Layer::forwardPropagate3(vector<double>i)
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
 	//obtain changed weights(if any)
+	for (int r = 0; r < 10; r++)
+	{
+		activationMap(r, 0) = i[r];
+	}
+
 	if (ThirdWeight.size() > 1) {
 		for (int j = 0; j < 20; j++) {
 			weights(j, 0) = ThirdWeight[j];
 		}
+		double vals = NULL;
+		double dot = NULL;
+		//PREVIOUS LAYER DATA
+
+		//PROPAGATION
+		int limiter = 0;
+		int counter = 0;
+		while (limiter < 2) {
+			Eigen::Matrix<double, 10, 1>temp_weights;
+			int j = 0;
+			while (counter < 20) {
+				temp_weights(j, 0) = weights(counter, 0);
+				if (counter == 9)
+					break;
+				else if (counter > 9 && counter % 10 == 0)
+					break;
+				counter++;
+				j++;
+			}
+			//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+			counter++;
+			//DOT PRODUCT
+			dot = activationMap.dot(temp_weights);
+			//ACTIVATION
+			vals = traintype.fncSigmoid(dot);  //ACTIVATION
+			//ThirdWeightData.push_back(vals);
+			ThirdWeightData[limiter] = vals;
+			limiter++;
+		}
 	}
 
+
+	//THIS CONDITION IS ONLY FOR FIRST PASS
 	if (ThirdWeight.size() < 1) {
 		//WEIGHT INITIALIZATION
 			for (int j = 0; j < 20; j++) {
 				weights(j, 0) = (random = hue(generator)) / 10;
 				ThirdWeight.push_back(weights(j, 0));
 			}
+			double vals = NULL;
+			double dot = NULL;
+			//PREVIOUS LAYER DATA
+
+			//PROPAGATION
+			int limiter = 0;
+			int counter = 0;
+			while (limiter < 2) {
+				Eigen::Matrix<double, 10, 1>temp_weights;
+				int j = 0;
+				while (counter < 20) {
+					temp_weights(j, 0) = weights(counter, 0);
+					if (counter == 9)
+						break;
+					else if (counter > 9 && counter % 10 == 0)
+						break;
+					counter++;
+					j++;
+				}
+				//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+				counter++;
+				//DOT PRODUCT
+				dot = activationMap.dot(temp_weights);
+				//ACTIVATION
+				vals = traintype.fncSigmoid(dot);  //ACTIVATION
+				ThirdWeightData.push_back(vals);
+				limiter++;
+			}
 	}
 
-	double vals = NULL;
-	double dot = NULL;
-	//PREVIOUS LAYER DATA
-	for (int r = 0; r < 10; r++)
-	{
-		activationMap(r, 0) = i[r];
-	}
-
-	//PROPAGATION
-	int limiter = 0;
-	int counter = 0;
-	while (limiter < 2) {
-		Eigen::Matrix<double, 10, 1>temp_weights;
-		int j = 0;
-		while (counter < 20) {
-			temp_weights(j, 0) = weights(counter, 0);
-			if (counter == 9)
-				break;
-			else if (counter > 9 && counter % 10 == 0)
-				break;
-			counter++;
-			j++;
-		}
-		//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
-		counter++;
-		//DOT PRODUCT
-		dot = activationMap.dot(temp_weights);
-		//ACTIVATION
-		vals = traintype.fncSigmoid(dot);  //ACTIVATION
-		ThirdWeightData.push_back(vals);
-		limiter++;
-	}
+	
 }
 
 double Layer::LayerSensitivity()
