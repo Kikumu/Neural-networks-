@@ -23,8 +23,10 @@ public:
 	double fncSigmoidDerivative(double);
 	double funcSincDerivative(double);
 	double funcSwishDerivative(double);
+	double funcCrossFunctionDerivative(double, double);
 	void cross_entropy_derivative();
 	void softmax_derivative();
+
 
 	//softmax vals
 	double softmaxVal_1;
@@ -44,6 +46,7 @@ public:
 	void MSE();
 
 	//softmax derivative
+	double softmax_derivative_sum;
 	vector<double>softmax_derivative_values;
 private:
 

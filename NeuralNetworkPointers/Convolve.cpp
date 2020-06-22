@@ -107,7 +107,7 @@ void Convolve::convole1(double i[][100])
 						for (int r = 0; r < 5; r++) {
 							for (int c = 0; c < 5; c++) {
 								//activation for forward propagation
-								activation_data = t.funcSwish(pre_activation(r, c));
+								activation_data = t.fncSigmoid(pre_activation(r, c));
 								sum += activation_data;
 							}
 						}
@@ -227,7 +227,7 @@ void Convolve::convolve2(vector<double>in)
 						pre_activation = inputChunk * FilterSize;
 						for (int r = 0; r < 2; r++) {
 							for (int c = 0; c < 2; c++) {
-								activation_data = t.funcSwish(pre_activation(r, c)); //ACTIVATION FUNCTION(SEE TRAINING.CPP FOR MORE OPTIONS)
+								activation_data = t.fncSigmoid(pre_activation(r, c)); //ACTIVATION FUNCTION(SEE TRAINING.CPP FOR MORE OPTIONS)
 								sum += activation_data;
 							}
 						}
@@ -325,7 +325,7 @@ void Convolve::convolve3(vector<double>in)
 						pre_activation = inputChunk * FilterSize;
 						for (int r = 0; r < 2; r++) {
 							for (int c = 0; c < 2; c++) {
-								activation_data = t.funcSwish(pre_activation(r, c));
+								activation_data = t.fncSigmoid(pre_activation(r, c));
 								sum += activation_data;
 							}
 						}

@@ -2,6 +2,7 @@
 
 #include <vector>
 #include "Eigen/Core"
+#include "CostFunction.h"
 
 using namespace std;
 using namespace Eigen;
@@ -19,9 +20,10 @@ public:
 	int getOutputSize();
 
 	int counter;
+	double learning_rate;
 	double LayerSensitivity();
 	
-	void backpropagation();
+	
 	vector<double>outputLayerWeightData;
 
 
@@ -33,15 +35,13 @@ public:
 	vector<double>Firstweight;
 	vector<double>SecondWeight;
 	vector<double>ThirdWeight;
-	vector<double>firstLayerData; //neurons
+	vector<double>firstLayerData;  //neurons
 	vector<double>secondLayerData; //neurons
-	vector<double>ThirdWeightData;
+	vector<double>ThirdWeightData; //neurons
 	vector<double>costData;
 
-	//layer 1 data, layer 2 data.....layer n data
-
-	void costRes(double, double, double[2], double[2]);
-	void costResDer(double, double, double[2], double[2]);
+	//BACKPROPAGATION
+	void backpropagation(double,double);
 
 protected:
 	int number_of_inputs_size; //input rows

@@ -65,6 +65,12 @@ double Training::funcSwishDerivative(double n)
 	x = n * (1.0 / (1.0 + exp(n)));
 	return x;
 }
+///////////////////////////////////////////////////////////////////////////////////////////////
+double Training::funcCrossFunctionDerivative(double network_output, double actual_output)
+{
+	double res = 2 * (actual_output - network_output);
+	return res;
+}
 
 void Training::cross_entropy_derivative()
 {
@@ -78,7 +84,7 @@ void Training::softmax_derivative()
 {
 	double x1 = (exp(softmaxVal_1) * exp(softmaxVal_2)) / pow((exp(softmaxVal_1) + exp(softmaxVal_2)), 2.0);
 	double x2 = (exp(softmaxVal_2) * exp(softmaxVal_2)) / pow((exp(softmaxVal_1) + exp(softmaxVal_2)), 2.0);
-
+	softmax_derivative_sum = x1 + x2;
 	softmax_derivative_values.push_back(x1); //derivative of output with respect to input
 	softmax_derivative_values.push_back(x2); //derivative of output with respect to input
 }

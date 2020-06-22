@@ -24,10 +24,13 @@ outputLayer output;
 Training trn;
 CostFunction cst;
 
-const double learning_rate = 0.5;
+const double learning_rate = 0.6;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 	int epochs = 0;
+	LayerFunc.learning_rate = learning_rate;
+
+
 	while (epochs < 5) {
 		int k = 0;
 		//im starting with kaggle cats and dogs for c++
@@ -80,31 +83,34 @@ int main(int argc, char** argv) {
 		//PREDICTIONS
 		cout << "Predictions: ";
 		cout << "\n";
-		cout << (trn.output_data1) * 100;
-		cout << "% sure its a cat";
-		cout << "\n";
-		cout << (trn.output_data2)*100;
+		//cout << (trn.output_data1) * 100;
+		cout << (trn.output_data1);
 		cout << "% sure its a dog";
+		cout << "\n";
+		//cout << (trn.output_data2)*100;
+		cout << (trn.output_data2);
+		cout << "% sure its a cat";
 
 		//COST
 		cout << "\n";
 		cout << "\n";
-		cst.costRes();
+		cst.costRes_1();
 		trn.categorical_crossentropy();
 		trn.MeanSquaredError = cst.costdat;
 		cout << "Cost: ";
 		cout << "\n";
 		cout << cst.costdat;
-		//cout << trn.categorical_crossentropy_value;
-
-		trn.cross_entropy_derivative();
-		trn.softmax_derivative();
-
-
 		waitKey(0);
+
 		//BACK PROPAGATION
 		//THOUGHT SKELETON: GRAB ALL WEIGHT DATA, COMPUTE DERIVATIVES
+		cst.cost_derivative();
+		trn.softmax_derivative();
+		cout << "\n";
+		cout << cst.cost_derivative_data;
+		LayerFunc.backpropagation(cst.cost_derivative_data, trn.softmax_derivative_sum);
 
+		
 		epochs++;
 	}
 	return 0;

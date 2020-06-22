@@ -5,8 +5,11 @@
 #include "Eigen/Core"
 #include "Training.h"
 
+
 Training traintype;
+CostFunction cost;
 using namespace std;
+
 
 Layer::Layer(int i, int h):number_of_inputs_size(i),number_of_output_size(h) {
 	number_of_inputs_size = NULL;
@@ -83,7 +86,7 @@ void Layer::forwardPropagate(vector<double>i)
 		//DOT PRODUCT
 		dot = activationMap.dot(temp_weights);
 		//ACTIVATION
-		vals = traintype.funcSwish(dot);
+		vals = traintype.fncSigmoid(dot);
 		firstLayerData.push_back(vals);
 		limiter++;
 	}
@@ -99,6 +102,20 @@ void Layer::forwardPropagate2(vector<double>i)
 	generator.seed(time(0));
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
+
+	//INPUT DATA GRAB
+	for (int r = 0; r < 10; r++)
+	{
+		activationMap(r, 0) = i[r];
+	}
+
+	//obtain changed weights(if any)
+	if (SecondWeight.size() > 1) {
+		for (int j = 0; j < 100; j++) {
+			weights(j, 0) = SecondWeight[j];
+		}
+	}
+
 	if (SecondWeight.size() < 1) {
 		//WEIGHT INITIALIZATION
 		
@@ -106,12 +123,10 @@ void Layer::forwardPropagate2(vector<double>i)
 				weights(j, 0) = (random = hue(generator)) / 10; //divide b number of inputs to scale properly
 				SecondWeight.push_back(weights(j, 0));
 			}
+
+
 	}
-	//INPUT DATA GRAB
-	for (int r = 0; r < 10; r++)
-	{
-		activationMap(r, 0) = i[r];
-	}
+	
 	//PROPAGATION
 	int limiter = 0;
 	int counter = 0;
@@ -132,7 +147,7 @@ void Layer::forwardPropagate2(vector<double>i)
 		//DOT PRODUCT
 		dot = activationMap.dot(temp_weights);
 		//ACTIVATION
-		vals = traintype.funcSwish(dot);
+		vals = traintype.fncSigmoid(dot);
 		secondLayerData.push_back(vals);
 		limiter++;
 	}
@@ -148,6 +163,13 @@ void Layer::forwardPropagate3(vector<double>i)
 	generator.seed(time(0));
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
+	//obtain changed weights(if any)
+	if (ThirdWeight.size() > 1) {
+		for (int j = 0; j < 20; j++) {
+			weights(j, 0) = ThirdWeight[j];
+		}
+	}
+
 	if (ThirdWeight.size() < 1) {
 		//WEIGHT INITIALIZATION
 			for (int j = 0; j < 20; j++) {
@@ -184,7 +206,7 @@ void Layer::forwardPropagate3(vector<double>i)
 		//DOT PRODUCT
 		dot = activationMap.dot(temp_weights);
 		//ACTIVATION
-		vals = traintype.funcSwish(dot);
+		vals = traintype.fncSigmoid(dot);  //ACTIVATION
 		ThirdWeightData.push_back(vals);
 		limiter++;
 	}
@@ -196,37 +218,64 @@ double Layer::LayerSensitivity()
 }
 
 
-
-void Layer::costRes(double totalNumberOfTrainingInputs, double inputs, double predicted_output[2], double desired_output[2])
-{
-	Eigen::Vector2d actual_output;
-	Eigen::Vector2d network_output;
-	Eigen::Vector2d difference;
-	double length;
-	double costData1;
-
-
-	for (int i = 0; i < 2; i++) {
-		network_output(i) = predicted_output[i]; //copied layer output to eigen
-		actual_output(i) = desired_output[i];
-	}
-
-	//difference = actual_output - network_output;
-	difference = network_output - actual_output;
-	length = difference.squaredNorm();
-
-	costData1 = (1.0 / (2.0 ))* length;
-	costData.push_back(costData1);
-}
-
-
 void Layer::init(double mu, double sigma)
 {
 }
 
-void Layer::backpropagation()
+void Layer::backpropagation(double c, double s)
 {
-	double LearningRate = 0.1;
+	int weights_loop = 0;
+	int limiter = 0; //neuron_loop
+	double cost_ = c;
+
+	//Third_layer
+	while (weights_loop < 20) {
+		//limiter = 0;
+		while (limiter < 10) {
+			double out_data = secondLayerData[limiter]; //grab neuron information
+			double associated_weight = ThirdWeight[weights_loop];
+			double new_out_data;
+			//weight update
+			new_out_data = traintype.fncSigmoidDerivative(out_data);
+			double new_weight;
+			double temp = learning_rate * new_out_data * s * c;
+			new_weight = associated_weight + temp;
+			ThirdWeight[weights_loop] = new_weight; //update info
+			limiter++;
+			break;
+		}
+		if (limiter > 8 && limiter % 9 == 0)
+			limiter = 0;
+		weights_loop++;
+	}
+
+	weights_loop = 0;
+	limiter = 0;
+	//Second Layer
+	while (weights_loop < 100) {
+		//limiter = 0;
+		while (limiter < 10) {
+			double out_data = firstLayerData[limiter]; //grab neuron information(current dat layer)
+			double out_data1 = secondLayerData[limiter]; // grab neuron info(prev dat layer)
+			double associated_weight = SecondWeight[weights_loop];
+			double new_out_data;
+			//weight update
+			new_out_data = traintype.fncSigmoidDerivative(out_data);//take current derivative
+			double new_weight;
+			double temp = learning_rate * new_out_data * out_data1; //currdev/prev dev/cost dev
+			new_weight = associated_weight + temp;
+			SecondWeight[weights_loop] = new_weight; //update info
+			limiter++;
+			break;
+		}
+		if (limiter > 8 && limiter % 9 == 0)
+			limiter = 0;
+		weights_loop++;
+	}
+
+
+
+		
 }
 
 
