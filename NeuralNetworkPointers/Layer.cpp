@@ -44,11 +44,52 @@ void Layer::forwardPropagate(vector<double>i)
 	Eigen::Matrix<double, 128, 1>activationMap; //Data from flattened layer
 	
 	double dot; //dot product per push
+	//GETS INPUTS FROM CONV FLATTENED LAYER
+	for (int r = 0; r < 128; r++)
+	{
+		activationMap(r, 0) = i[r];
+	}
+	double vals = NULL;
 
 	mt19937 generator;
 	generator.seed(time(0));
 	uniform_real_distribution<double>hue(0, 1);
 	double random = hue(generator);
+
+	if (Firstweight.size() > 1) {
+		for (int i = 0; i < 1280; i++) //vector of 94
+		{
+			weights(i, 0) = Firstweight[i];
+		}
+
+		//propagate
+		int limiter = 0;
+		int counter = 0;
+		while (limiter < 10) {
+			Eigen::Matrix<double, 128, 1>temp_weights;
+			int j = 0;
+			while (counter < 1280) {
+				temp_weights(j, 0) = weights(counter, 0);
+				if (counter == 127)
+					break;
+				else if (counter > 126 && counter % 127 == 0)
+					break;
+				counter++;
+				j++;
+			}
+			//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+			counter++;
+			//DOT PRODUCT
+			dot = activationMap.dot(temp_weights);
+			//ACTIVATION
+			vals = traintype.fncSigmoid(dot);
+			firstLayerData[limiter] = vals;
+			limiter++;
+		}
+	}
+
+
+
 	if (Firstweight.size() < 1) {
 		//weight initialization set to 1280. (cause 10 neurons in layer since flatenned layer contains 128 values)
 			for (int i = 0; i < 1280; i++) //vector of 94
@@ -57,39 +98,37 @@ void Layer::forwardPropagate(vector<double>i)
 				//Firstweight.push_back(random = hue(generator));
 				Firstweight.push_back(weights(i, 0));
 			}
+
+			//propagate
+			int limiter = 0;
+			int counter = 0;
+			while (limiter < 10) {
+				Eigen::Matrix<double, 128, 1>temp_weights;
+				int j = 0;
+				while (counter < 1280) {
+					temp_weights(j, 0) = weights(counter, 0);
+					if (counter == 127)
+						break;
+					else if (counter > 126 && counter % 127 == 0)
+						break;
+					counter++;
+					j++;
+				}
+				//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
+				counter++;
+				//DOT PRODUCT
+				dot = activationMap.dot(temp_weights);
+				//ACTIVATION
+				vals = traintype.fncSigmoid(dot);
+				firstLayerData.push_back(vals);
+				limiter++;
+			}
 	}
 
-	//GETS INPUTS FROM CONV FLATTENED LAYER
-	for (int r = 0; r < 128; r++)
-	{
-		activationMap(r, 0) = i[r];
-	}
-	double vals = NULL;
 
-	//propagate
-	int limiter = 0;
-	int counter = 0;
-	while (limiter < 10) {
-		Eigen::Matrix<double, 128, 1>temp_weights;
-		int j = 0;
-		while (counter < 1280) {
-			temp_weights(j, 0) = weights(counter, 0);
-			if (counter == 127)
-				break;
-			else if (counter > 126 && counter % 127 == 0)
-				break;
-			counter++;
-			j++;
-		}
-		//INCREMENT SO THAT ITS CARRIED OVER TO NEXT ITERATION
-		counter++;
-		//DOT PRODUCT
-		dot = activationMap.dot(temp_weights);
-		//ACTIVATION
-		vals = traintype.fncSigmoid(dot);
-		firstLayerData.push_back(vals);
-		limiter++;
-	}
+	
+
+	
 }
 
 void Layer::forwardPropagate2(vector<double>i)
@@ -279,7 +318,7 @@ void Layer::init(double mu, double sigma)
 {
 }
 
-void Layer::backpropagation(double c, double s)
+void Layer::backpropagation(double c, double s, vector<double> f)
 {
 	int weights_loop = 0;
 	int limiter = 0; //neuron_loop
@@ -306,6 +345,7 @@ void Layer::backpropagation(double c, double s)
 		weights_loop++;
 	}
 
+
 	weights_loop = 0;
 	limiter = 0;
 	//Second Layer
@@ -316,16 +356,50 @@ void Layer::backpropagation(double c, double s)
 			double out_data1 = secondLayerData[limiter]; // grab neuron info(prev dat layer)
 			double associated_weight = SecondWeight[weights_loop];
 			double new_out_data;
+			double new_out_data_1;
 			//weight update
 			new_out_data = traintype.fncSigmoidDerivative(out_data);//take current derivative
+			new_out_data_1 = traintype.fncSigmoidDerivative(out_data1);
 			double new_weight;
-			double temp = learning_rate * new_out_data * out_data1; //currdev/prev dev/cost dev
+			double temp = learning_rate * new_out_data * new_out_data_1; //currdev/prev dev/cost dev
 			new_weight = associated_weight + temp;
 			SecondWeight[weights_loop] = new_weight; //update info
 			limiter++;
 			break;
 		}
 		if (limiter > 8 && limiter % 9 == 0)
+			limiter = 0;
+		weights_loop++;
+	}
+
+
+	weights_loop = 0;
+	int data_loop = 0; //for first layer neuron loop
+	limiter = 0;
+	//First Layer
+	while (weights_loop < 1280) {
+		//limiter = 0;
+		while (limiter < 128) {
+			double out_data = f[limiter]; //grab neuron information(current dat layer(128))
+			double out_data1 = firstLayerData[data_loop];// grab neuron info(prev dat layer)
+			double associated_weight = Firstweight[weights_loop];
+			//firstweight, first layer data and flattened conv layer(f) 
+			double new_out_data;
+			double new_out_data_1;
+			//weight update
+			new_out_data = traintype.fncSigmoidDerivative(out_data);//take current derivative
+			new_out_data_1 = traintype.fncSigmoidDerivative(out_data1);
+			double new_weight;
+			double temp = learning_rate * new_out_data * new_out_data_1; //currdev/prev dev/cost dev
+			new_weight = associated_weight + temp;
+			Firstweight[weights_loop] = new_weight; //update info
+			limiter++;
+			data_loop++;
+			if (data_loop > 8 && data_loop % 9 == 0)
+				data_loop = 0;
+			break;
+		}
+		if (limiter > 126 && limiter % 127 == 0)
 			limiter = 0;
 		weights_loop++;
 	}

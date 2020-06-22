@@ -12,7 +12,6 @@
 #include "Layer.h"
 #include "Convolve.h"
 #include "CostFunction.h"
-#include "BackPropagation.h"
 
 using namespace std;
 using namespace cv;
@@ -24,14 +23,14 @@ outputLayer output;
 Training trn;
 CostFunction cst;
 
-const double learning_rate = 0.2;
+const double learning_rate = 0.5;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 	int epochs = 0;
 	LayerFunc.learning_rate = learning_rate;
 
 
-	while (epochs < 50) {
+	while (epochs < 100) {
 		int k = 0;
 		//im starting with kaggle cats and dogs for c++
 		Mat img_gray;
@@ -100,7 +99,7 @@ int main(int argc, char** argv) {
 		cout << "Cost: ";
 		cout << "\n";
 		cout << cst.costdat;
-		waitKey(0);
+		
 
 		//BACK PROPAGATION
 		//THOUGHT SKELETON: GRAB ALL WEIGHT DATA, COMPUTE DERIVATIVES
@@ -108,10 +107,11 @@ int main(int argc, char** argv) {
 		trn.softmax_derivative();
 		cout << "\n";
 		cout << cst.cost_derivative_data;
-		LayerFunc.backpropagation(cst.cost_derivative_data, trn.softmax_derivative_sum);
+		LayerFunc.backpropagation(cst.cost_derivative_data, trn.softmax_derivative_sum, conv.Flattened_features);
 
 		
 		epochs++;
 	}
+	waitKey(0);
 	return 0;
 }

@@ -25,9 +25,6 @@
     <Filter Include="Data">
       <UniqueIdentifier>{91246c90-414c-4fde-bafa-9389416d74e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="BackPropagation">
-      <UniqueIdentifier>{10bee7d0-947b-4615-9e6d-34bab69913fc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Layer.h">
@@ -53,9 +50,6 @@
     </ClInclude>
     <ClInclude Include="optimizers.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="BackPropagation.h">
-      <Filter>BackPropagation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -85,9 +79,6 @@
     </ClCompile>
     <ClCompile Include="optimizers.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="BackPropagation.cpp">
-      <Filter>BackPropagation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
