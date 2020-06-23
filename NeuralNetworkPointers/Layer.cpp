@@ -40,12 +40,12 @@ int Layer::getOutputSize()
 void Layer::forwardPropagate(vector<double>i)
 {
 	//create a vector of weights to multiply activation map with; since conv is 60 by 60
-	Eigen::Matrix<double, 1280, 1>weights;
-	Eigen::Matrix<double, 128, 1>activationMap; //Data from flattened layer
+	Eigen::Matrix<double, 80, 1>weights;
+	Eigen::Matrix<double, 8, 1>activationMap; //Data from flattened layer
 	
 	double dot; //dot product per push
 	//GETS INPUTS FROM CONV FLATTENED LAYER
-	for (int r = 0; r < 128; r++)
+	for (int r = 0; r < 8; r++)
 	{
 		activationMap(r, 0) = i[r];
 	}
@@ -57,7 +57,7 @@ void Layer::forwardPropagate(vector<double>i)
 	double random = hue(generator);
 
 	if (Firstweight.size() > 1) {
-		for (int i = 0; i < 1280; i++) //vector of 94
+		for (int i = 0; i < 80; i++) //vector of 94
 		{
 			weights(i, 0) = Firstweight[i];
 		}
@@ -66,13 +66,13 @@ void Layer::forwardPropagate(vector<double>i)
 		int limiter = 0;
 		int counter = 0;
 		while (limiter < 10) {
-			Eigen::Matrix<double, 128, 1>temp_weights;
+			Eigen::Matrix<double, 8, 1>temp_weights;
 			int j = 0;
-			while (counter < 1280) {
+			while (counter < 80) {
 				temp_weights(j, 0) = weights(counter, 0);
-				if (counter == 127)
+				if (counter == 7)
 					break;
-				else if (counter > 126 && counter % 127 == 0)
+				else if (counter > 6 && counter % 7 == 0)
 					break;
 				counter++;
 				j++;
@@ -92,7 +92,7 @@ void Layer::forwardPropagate(vector<double>i)
 
 	if (Firstweight.size() < 1) {
 		//weight initialization set to 1280. (cause 10 neurons in layer since flatenned layer contains 128 values)
-			for (int i = 0; i < 1280; i++) //vector of 94
+			for (int i = 0; i < 80; i++) //vector of 94
 			{
 				weights(i, 0) = (random = hue(generator)) / 128;
 				//Firstweight.push_back(random = hue(generator));
@@ -103,13 +103,13 @@ void Layer::forwardPropagate(vector<double>i)
 			int limiter = 0;
 			int counter = 0;
 			while (limiter < 10) {
-				Eigen::Matrix<double, 128, 1>temp_weights;
+				Eigen::Matrix<double, 8, 1>temp_weights;
 				int j = 0;
-				while (counter < 1280) {
+				while (counter < 80) {
 					temp_weights(j, 0) = weights(counter, 0);
-					if (counter == 127)
+					if (counter == 7)
 						break;
-					else if (counter > 126 && counter % 127 == 0)
+					else if (counter > 6 && counter % 7 == 0)
 						break;
 					counter++;
 					j++;
@@ -323,7 +323,7 @@ void Layer::backpropagation(double c, double s, vector<double> f)
 	int weights_loop = 0;
 	int limiter = 0; //neuron_loop
 	double cost_ = c;
-
+///--------------------------------------FULLY CONNECTED 
 	//Third_layer
 	while (weights_loop < 20) {
 		//limiter = 0;
@@ -377,9 +377,9 @@ void Layer::backpropagation(double c, double s, vector<double> f)
 	int data_loop = 0; //for first layer neuron loop
 	limiter = 0;
 	//First Layer
-	while (weights_loop < 1280) {
+	while (weights_loop < 80) {
 		//limiter = 0;
-		while (limiter < 128) {
+		while (limiter < 8) {
 			double out_data = f[limiter]; //grab neuron information(current dat layer(128))
 			double out_data1 = firstLayerData[data_loop];// grab neuron info(prev dat layer)
 			double associated_weight = Firstweight[weights_loop];
@@ -399,14 +399,10 @@ void Layer::backpropagation(double c, double s, vector<double> f)
 				data_loop = 0;
 			break;
 		}
-		if (limiter > 126 && limiter % 127 == 0)
+		if (limiter > 6 && limiter % 7 == 0)
 			limiter = 0;
 		weights_loop++;
-	}
-
-
-
-		
+	}	
 }
 
 

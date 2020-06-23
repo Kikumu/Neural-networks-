@@ -51,11 +51,11 @@ int main(int argc, char** argv) {
 		for (int i = 0; i < 4; i++)
 			maxpooling.poolConv(conv.featureMapData1[i]); //retouched
 		for (int i = 0; i < 4; i++)
-			conv.convolve2(maxpooling.pooledConv[i]); //retouched
-		for (int i = 0; i < 16; i++)
+			conv.convolve2(maxpooling.pooledConv[i],i); //retouched
+		for (int i = 0; i < 4; i++)
 			maxpooling.poolConv2(conv.featureMapData2[i]);//retouched
-		for (int i = 0; i < 16; i++)
-			conv.convolve3(maxpooling.pooledConv1[i]);
+		for (int i = 0; i < 2; i++)
+			conv.convolve3(maxpooling.pooledConv1[i],i);
 
 		//FLATTENING
 		conv.flatten();
@@ -67,17 +67,20 @@ int main(int argc, char** argv) {
 		trn.softmaxVal_1 = LayerFunc.ThirdWeightData.at(0);
 		trn.softmaxVal_2 = LayerFunc.ThirdWeightData.at(1);
 		trn.funcSoftmax();
-		cst.network_output1.push_back(trn.output_data1);
-		cst.network_output1.push_back(trn.output_data2);
-
+		//cst.network_output1.push_back(trn.output_data1);
+		//cst.network_output1.push_back(trn.output_data2);
+		cst.network_out[0] = trn.output_data1;
+		cst.network_out[1] = trn.output_data2;
 		//LABEL
 		double label[2];
 		label[0] = 0.0;
 		label[1] = 1.0;
-		trn.label_data.push_back(label[0]);
-		trn.label_data.push_back(label[1]);
-		cst.actual_output1.push_back(label[0]);
-		cst.actual_output1.push_back(label[1]);
+		//trn.label_data.push_back(label[0]);
+		//trn.label_data.push_back(label[1]);
+		//cst.actual_output1.push_back(label[0]);
+		//cst.actual_output1.push_back(label[1]);
+		cst.actual_out[0] = label[0];
+		cst.actual_out[1] = label[1];
 
 		//PREDICTIONS
 		cout << "Predictions: ";
@@ -94,10 +97,9 @@ int main(int argc, char** argv) {
 		cout << "\n";
 		cout << "\n";
 		cst.costRes_1();
-		trn.categorical_crossentropy();
-		trn.MeanSquaredError = cst.costdat;
+		//trn.categorical_crossentropy();
+		//trn.MeanSquaredError = cst.costdat;
 		cout << "Cost: ";
-		cout << "\n";
 		cout << cst.costdat;
 		
 
@@ -108,8 +110,9 @@ int main(int argc, char** argv) {
 		cout << "\n";
 		cout << cst.cost_derivative_data;
 		LayerFunc.backpropagation(cst.cost_derivative_data, trn.softmax_derivative_sum, conv.Flattened_features);
-
-		
+		//conv.backpropagation();
+		cout << "\n";
+		cout << "\n";
 		epochs++;
 	}
 	waitKey(0);

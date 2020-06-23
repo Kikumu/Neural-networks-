@@ -37,7 +37,7 @@ void LayerMaxPooling::poolConv(vector<double> e)
 			for (int c = 0; c < 19; c++) {
 				if (c < 15) {
 					filter = inputTensor.block(r, c, 5, 5);
-					maxNumberStore.push_back(filter.maxCoeff());
+					maxNumberStore.push_back(filter.mean()); //changed to average pooling
 				}
 			}
 		}
@@ -66,7 +66,7 @@ void LayerMaxPooling::poolConv2(vector<double>e)
 			for (int c = 0; c < 13; c++) {
 				if (c < 8) {
 					filter = inputTensor.block(r, c, 5, 5);
-					maxNumberStore.push_back(filter.maxCoeff());
+					maxNumberStore.push_back(filter.mean()); //changed to average pooling
 				}
 			}
 		}

@@ -84,6 +84,7 @@ void Convolve::convole1(double i[][100])
 		data1.push_back(saveFilter4);
 	}
 	//forward propagation
+	//for(chk)
 	int feature_counter = 0;
 	while (feature_counter < 4) {
 		for (int r = 0; r < 100; r++) {
@@ -133,7 +134,7 @@ void Convolve::convole1(double i[][100])
 	
 }
 
-void Convolve::convolve2(vector<double>in)
+void Convolve::convolve2(vector<double>in,int chk)
 {
 	//outputsize calc = (inputwidth - filterwidth)/stride + 1
 	int stride = 0;
@@ -203,7 +204,7 @@ void Convolve::convolve2(vector<double>in)
 	}
 	//FORWARD PROPAGATION
 
-	int feature_counter = 0;
+	int feature_counter = chk;
 	while (feature_counter < 4) {
 		//SET TO 15 TO MATCH INPUT SIZE
 		for (int r = 0; r < 15; r++) {
@@ -244,15 +245,27 @@ void Convolve::convolve2(vector<double>in)
 				}
 			}
 		}
-		if (feature_counter == 0)featureMapData2.push_back(filter_summary);
-		else if (feature_counter == 1)featureMapData2.push_back(filter_summary1);
-		else if (feature_counter == 2)featureMapData2.push_back(filter_summary2);
-		else if (feature_counter == 3)featureMapData2.push_back(filter_summary3);
-		feature_counter++;
+		if (feature_counter == 0)
+		{
+			featureMapData2.push_back(filter_summary);
+		}
+		else if (feature_counter == 1) 
+		{
+			featureMapData2.push_back(filter_summary1); 
+		}
+		else if (feature_counter == 2)
+		{ 
+			featureMapData2.push_back(filter_summary2);
+		}
+		else if (feature_counter == 3) {
+			featureMapData2.push_back(filter_summary3); 
+		}
+		//feature_counter++;
+		break;
 	}
 }
 
-void Convolve::convolve3(vector<double>in)
+void Convolve::convolve3(vector<double>in, int chk)
 {
 	//outputsize calc = (inputwidth - filterwidth)/stride + 1
 	int stride = 2;
@@ -303,7 +316,7 @@ void Convolve::convolve3(vector<double>in)
 
 	//32(16*2). loop through filter one and 2 separately
 	//FORWARD PROPAGATION
-	int feature_counter = 0;
+	int feature_counter = chk;
 	while (feature_counter < 2) {
 		for (int r = 0; r < 8; r++) {
 			if (r < 6) {
@@ -338,15 +351,20 @@ void Convolve::convolve3(vector<double>in)
 				}
 			}
 		}
-		if (feature_counter == 0)featureMapData3.push_back(filter_summary);
-		else if (feature_counter == 1)featureMapData3.push_back(filter_summary1);
-		feature_counter++;
+		if (feature_counter == 0) { 
+			featureMapData3.push_back(filter_summary); 
+		}
+		else if (feature_counter == 1)
+		{
+			featureMapData3.push_back(filter_summary1);
+		}
+		break;
 	}
 }
 
 void Convolve::flatten()
 {
-		vector<double>itr;
+	vector<double>itr;
 	for (int i = 0; i < featureMapData3.size(); i++)
 	{
 		itr = featureMapData3[i]; //save ech value in a vector
@@ -355,4 +373,37 @@ void Convolve::flatten()
 		}
 	}
 }
+
+void Convolve::backpropagation()
+{
+	//feature map 3(past)
+	//feature map 2(current)
+	//weights of fm 2[i] = curr[i] + lr*der(fm3)*der()
+	int flattened_loop = 0;
+	int filter_loop = 0; //iterates through filter(4 - 2 by 2)
+	while (flattened_loop < 128) {
+		double new_out_data_1;
+		double out_data_1;
+		out_data_1 = Flattened_features[flattened_loop];
+		new_out_data_1 =(1.0/(25.0 * t.fncSigmoidDerivative(out_data_1)));
+		//so....we flip the kernel..by 180...and then work on it "normally" while changing feature weights
+		//WEIGHT ONLY BACK PROPAGATED TO THE "WINNING" NEURON BECAUSE OF MAXPOOLING.
+		//SINCE ITS A 5 BY 5 CONVOLUTION IT WILL BE OUTPUT DERIVATIVE MULTIPLIED BY 1/25
+
+
+
+	}
+
+	//double out_data = f[limiter]; //grab neuron information(current dat layer(128))
+	//double out_data1 = firstLayerData[data_loop];// grab neuron info(prev dat layer)
+	//double associated_weight = Firstweight[weights_loop];
+	////firstweight, first layer data and flattened conv layer(f) 
+	//double new_out_data;
+	//double new_out_data_1;
+	////weight update
+	//new_out_data = t.fncSigmoidDerivative(out_data);//take current derivative
+	
+
+}
+
 

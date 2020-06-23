@@ -10,6 +10,8 @@ public:
 
 	vector<double>network_output1;
 	vector<double>actual_output1;
+	double actual_out[2];
+	double network_out[2];
 	//variables: total number of inputs(per var),input as a whole, current network output, actual output(i need to find some sort of label)
 
 	void costRes();

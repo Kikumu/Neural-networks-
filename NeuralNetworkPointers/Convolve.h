@@ -13,8 +13,8 @@ public:
 	vector<vector<double>>featureMapData1;
 	vector<vector<double>>featureMapData2;
 	vector<vector<double>>featureMapData3; //final feature map
-	void convolve2(vector<double>);
-	void convolve3(vector<double>);
+	void convolve2(vector<double>,int);
+	void convolve3(vector<double>,int);
 	int counter1;
 
 	//for back prop(last layer only)
@@ -28,7 +28,8 @@ public:
 	vector<double>filter_summary2;
 	vector<double>filter_summary3;
 
-	vector<vector<double>>inputbackprop1; //for last layer
+	//vector<vector<double>>inputbackprop1; //for last layer
+	void backpropagation();
 	
 	vector<double>Flattened_features;
 
