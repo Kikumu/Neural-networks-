@@ -78,6 +78,7 @@ This error is due to a Windows10Kit missing in the Programfiles(x86) folder.
 45) https://towardsdatascience.com/error-analysis-in-neural-networks-6b0785858845
 46) https://towardsdatascience.com/how-does-back-propagation-in-artificial-neural-networks-work-c7cad873ea7LGLJ-MT6E-ALMF-8KCN
 47) http://neuralnetworksanddeeplearning.com/chap1.html#implementing_our_network_to_classify_digits
+48) https://www.jefkine.com/general/2016/09/05/backpropagation-in-convolutional-neural-networks/
 
 
 
