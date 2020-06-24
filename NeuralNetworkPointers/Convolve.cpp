@@ -565,6 +565,26 @@ void Convolve::backpropagation(vector<vector<double>> f2, vector<vector<double>>
 		data2[feature_loop] = weights_temp;
 		sum = 0;
 	}
+
+
+
+	for (int feature_loop = 0; feature_loop < f1.size(); feature_loop++) {
+		vector<double>temp = f1[feature_loop]; //temp incoming data storage
+		vector<double>weights_temp = data1[feature_loop]; //weights hold temp
+		//find summation/derivatives
+		double sum = 0;
+		for (int data_loop = 0; data_loop < temp.size(); data_loop++) {
+			sum += t.fncSigmoidDerivative(temp[data_loop]);
+		}
+		sum = (1.0 / (25.0 * sum));
+		//weight change loop
+		for (int weights_loop = 0; weights_loop < data1[feature_loop].size(); weights_loop++) {
+			weights_temp[weights_loop] = weights_temp[weights_loop] + learning_rate * sum; //update
+		}
+		data1[feature_loop] = weights_temp;
+		sum = 0;
+	}
+
 }
 
 

@@ -66,8 +66,8 @@ int main(int argc, char** argv) {
 		//probabilities
 		trn.softmaxVal_1 = LayerFunc.ThirdWeightData.at(0);
 		trn.softmaxVal_2 = LayerFunc.ThirdWeightData.at(1);
-		cout << setprecision(9) << trn.softmaxVal_1;
-		cout << "\n";
+		/*cout << setprecision(9) << trn.softmaxVal_1;
+		cout << "\n";*/
 		trn.funcSoftmax();
 		//cst.network_output1.push_back(trn.output_data1);
 		//cst.network_output1.push_back(trn.output_data2);
@@ -88,11 +88,11 @@ int main(int argc, char** argv) {
 		cout << "Predictions: ";
 		cout << "\n";
 		//cout << (trn.output_data1) * 100;
-		cout << setprecision(9)<< trn.output_data1;
+		cout << setprecision(9)<< (trn.output_data1)*100;
 		cout << "% sure its a dog";
 		cout << "\n";
 		//cout << (trn.output_data2)*100;
-		cout << setprecision(9)<< trn.output_data2;
+		cout << setprecision(9)<< (trn.output_data2)*100;
 		cout << "% sure its a cat";
 
 		//COST
@@ -106,7 +106,7 @@ int main(int argc, char** argv) {
 
 		//trn.categorical_crossentropy();
 		//trn.MeanSquaredError = cst.costdat;
-		cout << "Cost: ";
+		cout << "Overall Network Cost: ";
 		cout << cst.costdat;
 		
 
@@ -116,6 +116,7 @@ int main(int argc, char** argv) {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		cout << "\n";
+		cout << "Overall Derivative Passed back: ";
 		cout << cst.cost_derivative_data;
 		LayerFunc.backpropagation(cst.derivative_cost, trn.softmax_derivative_values, conv.Flattened_features);
 		conv.backpropagation(maxpooling.pooledConv1, maxpooling.pooledConv);
