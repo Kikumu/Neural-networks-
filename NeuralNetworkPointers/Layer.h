@@ -41,7 +41,7 @@ public:
 	vector<double>costData;
 
 	//BACKPROPAGATION
-	void backpropagation(double,double,vector<double>);
+	void backpropagation(double[2],double[2],vector<double>);
 
 protected:
 	int number_of_inputs_size; //input rows

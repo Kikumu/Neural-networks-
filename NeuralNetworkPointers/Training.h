@@ -47,7 +47,7 @@ public:
 
 	//softmax derivative
 	double softmax_derivative_sum;
-	vector<double>softmax_derivative_values;
+	double softmax_derivative_values[2];
 private:
 
 };

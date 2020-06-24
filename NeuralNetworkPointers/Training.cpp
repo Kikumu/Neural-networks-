@@ -85,8 +85,8 @@ void Training::softmax_derivative()
 	double x1 = (exp(softmaxVal_1) * exp(softmaxVal_2)) / pow((exp(softmaxVal_1) + exp(softmaxVal_2)), 2.0);
 	double x2 = (exp(softmaxVal_2) * exp(softmaxVal_2)) / pow((exp(softmaxVal_1) + exp(softmaxVal_2)), 2.0);
 	softmax_derivative_sum = x1 + x2;
-	softmax_derivative_values.push_back(x1); //derivative of output with respect to input
-	softmax_derivative_values.push_back(x2); //derivative of output with respect to input
+	softmax_derivative_values[0] = (x1); //derivative of output with respect to input
+	softmax_derivative_values[1] = (x2); //derivative of output with respect to input
 }
 
 void Training::categorical_crossentropy()

@@ -318,11 +318,11 @@ void Layer::init(double mu, double sigma)
 {
 }
 
-void Layer::backpropagation(double c, double s, vector<double> f)
+void Layer::backpropagation(double c[2], double s[2], vector<double> f)
 {
 	int weights_loop = 0;
 	int limiter = 0; //neuron_loop
-	double cost_ = c;
+	int output_neuron = 0;
 ///--------------------------------------FULLY CONNECTED 
 	//Third_layer
 	while (weights_loop < 20) {
@@ -334,16 +334,31 @@ void Layer::backpropagation(double c, double s, vector<double> f)
 			//weight update
 			new_out_data = traintype.fncSigmoidDerivative(out_data);
 			double new_weight;
-			double temp = learning_rate * new_out_data * s * c;
+			double temp = learning_rate * new_out_data * s[output_neuron] * c[output_neuron];
 			new_weight = associated_weight + temp;
 			ThirdWeight[weights_loop] = new_weight; //update info
 			limiter++;
 			break;
 		}
-		if (limiter > 8 && limiter % 9 == 0)
+
+		if (limiter > 8 && limiter % 9 == 0) {
 			limiter = 0;
+			output_neuron++;
+		}
+			
 		weights_loop++;
 	}
+
+
+
+
+
+
+
+
+
+
+
 
 
 	weights_loop = 0;
@@ -361,7 +376,8 @@ void Layer::backpropagation(double c, double s, vector<double> f)
 			new_out_data = traintype.fncSigmoidDerivative(out_data);//take current derivative
 			new_out_data_1 = traintype.fncSigmoidDerivative(out_data1);
 			double new_weight;
-			double temp = learning_rate * new_out_data * new_out_data_1; //currdev/prev dev/cost dev
+			//double temp = learning_rate * new_out_data * new_out_data_1; //currdev/prev dev/cost dev
+			double temp = learning_rate * new_out_data_1;
 			new_weight = associated_weight + temp;
 			SecondWeight[weights_loop] = new_weight; //update info
 			limiter++;
@@ -390,7 +406,8 @@ void Layer::backpropagation(double c, double s, vector<double> f)
 			new_out_data = traintype.fncSigmoidDerivative(out_data);//take current derivative
 			new_out_data_1 = traintype.fncSigmoidDerivative(out_data1);
 			double new_weight;
-			double temp = learning_rate * new_out_data * new_out_data_1; //currdev/prev dev/cost dev
+			//double temp = learning_rate * new_out_data * new_out_data_1; //currdev/prev dev/cost dev
+			double temp = learning_rate  * new_out_data_1; //currdev/prev dev/cost dev
 			new_weight = associated_weight + temp;
 			Firstweight[weights_loop] = new_weight; //update info
 			limiter++;

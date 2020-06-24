@@ -23,14 +23,14 @@ outputLayer output;
 Training trn;
 CostFunction cst;
 
-const double learning_rate = 0.1;
+const double learning_rate = 0.5;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 	int epochs = 0;
 	LayerFunc.learning_rate = learning_rate;
 
 
-	while (epochs < 100) {
+	while (epochs < 1000) {
 		int k = 0;
 		//im starting with kaggle cats and dogs for c++
 		Mat img_gray;
@@ -66,6 +66,8 @@ int main(int argc, char** argv) {
 		//probabilities
 		trn.softmaxVal_1 = LayerFunc.ThirdWeightData.at(0);
 		trn.softmaxVal_2 = LayerFunc.ThirdWeightData.at(1);
+		cout << setprecision(9) << trn.softmaxVal_1;
+		cout << "\n";
 		trn.funcSoftmax();
 		//cst.network_output1.push_back(trn.output_data1);
 		//cst.network_output1.push_back(trn.output_data2);
@@ -79,24 +81,29 @@ int main(int argc, char** argv) {
 		//trn.label_data.push_back(label[1]);
 		//cst.actual_output1.push_back(label[0]);
 		//cst.actual_output1.push_back(label[1]);
-		cst.actual_out[0] = label[0];
-		cst.actual_out[1] = label[1];
+		cst.actual_out[0] = 0.0;
+		cst.actual_out[1] = 1.0;
 
 		//PREDICTIONS
 		cout << "Predictions: ";
 		cout << "\n";
 		//cout << (trn.output_data1) * 100;
-		cout << (trn.output_data1);
-		cout << "% sure its a cat";
+		cout << setprecision(9)<< trn.output_data1;
+		cout << "% sure its a dog";
 		cout << "\n";
 		//cout << (trn.output_data2)*100;
-		cout << (trn.output_data2);
-		cout << "% sure its a dog";
+		cout << setprecision(9)<< trn.output_data2;
+		cout << "% sure its a cat";
 
 		//COST
 		cout << "\n";
 		cout << "\n";
-		cst.costRes_1();
+		cst.costRes();                 //cost per output neuron
+		cst.costRes_1();               //overall network cost
+		cst.cost_derivative_per_out(); //derivative per output
+
+
+
 		//trn.categorical_crossentropy();
 		//trn.MeanSquaredError = cst.costdat;
 		cout << "Cost: ";
@@ -105,12 +112,17 @@ int main(int argc, char** argv) {
 
 		//BACK PROPAGATION
 		//THOUGHT SKELETON: GRAB ALL WEIGHT DATA, COMPUTE DERIVATIVES
-		cst.cost_derivative();
-		trn.softmax_derivative();
+		cst.cost_derivative();            //overall network 
+		trn.softmax_derivative();         //overall network 
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 		cout << "\n";
 		cout << cst.cost_derivative_data;
-		LayerFunc.backpropagation(cst.cost_derivative_data, trn.softmax_derivative_sum, conv.Flattened_features);
-		//conv.backpropagation();
+		LayerFunc.backpropagation(cst.derivative_cost, trn.softmax_derivative_values, conv.Flattened_features);
+
+		conv.backpropagation();
 		cout << "\n";
 		cout << "\n";
 		epochs++;

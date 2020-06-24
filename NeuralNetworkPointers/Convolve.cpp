@@ -467,24 +467,68 @@ void Convolve::flatten(int epch)
 
 void Convolve::backpropagation()
 {
+	double learning_rate = 0.5;
+
+	//FIRST CONVOLUTION/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	Eigen::Matrix<double, 2, 2>FilterSize; //weights
+	Eigen::Matrix<double, 2, 2>FilterSize1; //weights
+	vector<double>temp;
 	//feature map 3(past)
 	//feature map 2(current)
 	//weights of fm 2[i] = curr[i] + lr*der(fm3)*der()
 	int flattened_loop = 0;
-	int filter_loop = 0; //iterates through filter(4 - 2 by 2)
-	while (flattened_loop < 128) {
-		double new_out_data_1;
-		double out_data_1;
-		out_data_1 = Flattened_features[flattened_loop];
-		new_out_data_1 =(1.0/(25.0 * t.fncSigmoidDerivative(out_data_1)));
+	int filter_loop = 0; //iterates through filter(2 - 2 by 2)
+	double new_out_data_1 = 0;
+	double out_data_1;
+
+	while (flattened_loop < 8) {
+
+		//first feature filter update
+		while (flattened_loop < 4) {
+			out_data_1 = Flattened_features[flattened_loop];
+			new_out_data_1 +=  t.fncSigmoidDerivative(out_data_1);
+			break;
+			//new_out_data_1 = (1.0 / (25.0 * t.fncSigmoidDerivative(out_data_1)));
+		}
+
 		//so....we flip the kernel..by 180...and then work on it "normally" while changing feature weights
 		//WEIGHT ONLY BACK PROPAGATED TO THE "WINNING" NEURON BECAUSE OF MAXPOOLING.
 		//SINCE ITS A 5 BY 5 CONVOLUTION IT WILL BE OUTPUT DERIVATIVE MULTIPLIED BY 1/25
+		if (flattened_loop > 2 && flattened_loop == 3) {
+			new_out_data_1 = (1.0 / (25.0 * new_out_data_1));
+			//update to filter(in data 3)
+			//i want to obtain data from data3(0)
+			temp = data3[0];
+			for (int r = 0; r < 4; r++)
+			{
+				temp[r] = temp[r] + (learning_rate * new_out_data_1);
+			}
+			data3[0] = temp;
+			new_out_data_1 = 0.0;
+		}
 
+		while (flattened_loop > 3)
+		{
+			out_data_1 = Flattened_features[flattened_loop];
+			new_out_data_1 += t.fncSigmoidDerivative(out_data_1);
+			break;
+		}
+		if (flattened_loop > 6 && flattened_loop == 7) {
+			new_out_data_1 = (1.0 / (25.0 * new_out_data_1));
+			//update to filter(in data 3)
+			//i want to obtain data from data3(0)
+			temp = data3[1];
+			for (int r = 0; r < 4; r++)
+			{
+				temp[r] = temp[r] + (learning_rate * new_out_data_1);
+			}
+			data3[1] = temp;
+			new_out_data_1 = 0.0;
+		}
 
+		flattened_loop++;
 
 	}
-
 	//double out_data = f[limiter]; //grab neuron information(current dat layer(128))
 	//double out_data1 = firstLayerData[data_loop];// grab neuron info(prev dat layer)
 	//double associated_weight = Firstweight[weights_loop];
@@ -493,7 +537,9 @@ void Convolve::backpropagation()
 	//double new_out_data_1;
 	////weight update
 	//new_out_data = t.fncSigmoidDerivative(out_data);//take current derivative
-	
+
+	//SECOND CONVOLUTION///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 }
 
