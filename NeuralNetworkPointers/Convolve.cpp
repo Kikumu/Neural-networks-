@@ -15,7 +15,7 @@ Convolve::~Convolve()
 {
 }
 
-void Convolve::convole1(double i[][100])
+void Convolve::convole1(double i[][100], int chk)
 {
 	//outputsize calc = (inputwidth - filterwidth)/stride + 1
 	int stride = 4;
@@ -125,16 +125,56 @@ void Convolve::convole1(double i[][100])
 				}
 			}
 		}
-		if(feature_counter == 0)featureMapData1.push_back(filter_summary);
-		else if(feature_counter == 1)featureMapData1.push_back(filter_summary1);
-		else if (feature_counter == 2)featureMapData1.push_back(filter_summary2);
-		else if (feature_counter == 3)featureMapData1.push_back(filter_summary3);
+		if (feature_counter == 0 && chk == 0) {
+			featureMapData1.push_back(filter_summary);
+			filter_summary.clear();
+		}
+		else if (feature_counter == 0 && chk != 0) {
+			featureMapData1[feature_counter] = filter_summary;
+			filter_summary.clear();
+		}
+
+
+		else if (feature_counter == 1 && chk == 0) {
+			featureMapData1.push_back(filter_summary1);
+			filter_summary1.clear();
+		}
+		else if (feature_counter == 1 && chk != 0) {
+			featureMapData1[feature_counter] = filter_summary1;
+			filter_summary1.clear();
+		}
+
+
+
+		else if (feature_counter == 2 && chk == 0){
+			featureMapData1.push_back(filter_summary2);
+			filter_summary2.clear();
+		}
+		else if (feature_counter == 2 && chk != 0) {
+			featureMapData1[feature_counter] = filter_summary2;
+			filter_summary2.clear();
+		}
+
+
+
+
+		else if (feature_counter == 3 && chk == 0) {
+			featureMapData1.push_back(filter_summary3);
+			filter_summary3.clear();
+		}
+		else if (feature_counter == 3 and chk != 0) {
+			featureMapData1[feature_counter] = filter_summary3;
+			filter_summary3.clear();
+		}
 		feature_counter++;
 	}
-	
 }
 
-void Convolve::convolve2(vector<double>in,int chk)
+
+
+
+
+void Convolve::convolve2(vector<double>in,int chk, int epch)
 {
 	//outputsize calc = (inputwidth - filterwidth)/stride + 1
 	int stride = 0;
@@ -245,27 +285,53 @@ void Convolve::convolve2(vector<double>in,int chk)
 				}
 			}
 		}
-		if (feature_counter == 0)
-		{
+		if (feature_counter == 0 && epch == 0) {
 			featureMapData2.push_back(filter_summary);
+			filter_summary.clear();
 		}
-		else if (feature_counter == 1) 
-		{
-			featureMapData2.push_back(filter_summary1); 
+		else if (feature_counter == 0 && epch != 0) {
+			featureMapData2[feature_counter] = filter_summary;
+			filter_summary.clear();
 		}
-		else if (feature_counter == 2)
-		{ 
+
+
+		else if (feature_counter == 1 && epch == 0) {
+			featureMapData2.push_back(filter_summary1);
+			filter_summary1.clear();
+		}
+		else if (feature_counter == 1 && epch != 0) {
+			featureMapData2[feature_counter] = filter_summary1;
+			filter_summary1.clear();
+		}
+
+
+
+		else if (feature_counter == 2 && epch == 0) {
 			featureMapData2.push_back(filter_summary2);
+			filter_summary2.clear();
 		}
-		else if (feature_counter == 3) {
-			featureMapData2.push_back(filter_summary3); 
+		else if (feature_counter == 2 && epch != 0) {
+			featureMapData2[feature_counter] = filter_summary2;
+			filter_summary2.clear();
+		}
+
+
+
+
+		else if (feature_counter == 3 && epch == 0) {
+			featureMapData2.push_back(filter_summary3);
+			filter_summary3.clear();
+		}
+		else if (feature_counter == 3 and epch != 0) {
+			featureMapData2[feature_counter] = filter_summary3;
+			filter_summary3.clear();
 		}
 		//feature_counter++;
 		break;
 	}
 }
 
-void Convolve::convolve3(vector<double>in, int chk)
+void Convolve::convolve3(vector<double>in, int chk, int epch)
 {
 	//outputsize calc = (inputwidth - filterwidth)/stride + 1
 	int stride = 2;
@@ -351,27 +417,52 @@ void Convolve::convolve3(vector<double>in, int chk)
 				}
 			}
 		}
-		if (feature_counter == 0) { 
-			featureMapData3.push_back(filter_summary); 
+		if (feature_counter == 0 && epch == 0) {
+			featureMapData3.push_back(filter_summary);
+			filter_summary.clear();
 		}
-		else if (feature_counter == 1)
-		{
+		else if (feature_counter == 0 && epch != 0) {
+			featureMapData3[feature_counter] = filter_summary;
+			filter_summary.clear();
+		}
+
+
+		else if (feature_counter == 1 && epch == 0) {
 			featureMapData3.push_back(filter_summary1);
+			filter_summary1.clear();
 		}
+		else if (feature_counter == 1 && epch != 0) {
+			featureMapData3[feature_counter] = filter_summary1;
+			filter_summary1.clear();
+		}
+
 		break;
 	}
 }
 
-void Convolve::flatten()
+void Convolve::flatten(int epch)
 {
 	vector<double>itr;
-	for (int i = 0; i < featureMapData3.size(); i++)
-	{
-		itr = featureMapData3[i]; //save ech value in a vector
-		for (int j = 0; j < itr.size(); j++) {
-			Flattened_features.push_back(itr.at(j));
+	if (epch == 0) {
+		for (int i = 0; i < featureMapData3.size(); i++)
+		{
+			itr = featureMapData3[i]; //save ech value in a vector
+			for (int j = 0; j < itr.size(); j++) {
+				Flattened_features.push_back(itr.at(j));
+			}
 		}
 	}
+	else
+	{
+		for (int i = 0; i < featureMapData3.size(); i++)
+		{
+			itr = featureMapData3[i]; //save ech value in a vector
+			for (int j = 0; j < itr.size(); j++) {
+				Flattened_features[j] = (itr.at(j));
+			}
+		}
+	}
+	
 }
 
 void Convolve::backpropagation()

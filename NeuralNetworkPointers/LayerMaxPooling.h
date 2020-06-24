@@ -13,8 +13,8 @@ class LayerMaxPooling {
 public:
 	LayerMaxPooling();
 	~LayerMaxPooling();
-	void poolConv(vector<double>);
-	void poolConv2(vector<double>);
+	void poolConv(vector<double>, int);
+	void poolConv2(vector<double>, int);
 	vector<vector<double>>pooledConv;
 	vector<vector<double>>pooledConv1;
 	//double** poolConvolve(vector<std::vector<double>>);

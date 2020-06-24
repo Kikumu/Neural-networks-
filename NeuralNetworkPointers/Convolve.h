@@ -9,12 +9,12 @@ class Convolve
 public:
 	Convolve();
 	~Convolve();
-	void convole1(double[][100]);
+	void convole1(double[][100],int);
 	vector<vector<double>>featureMapData1;
 	vector<vector<double>>featureMapData2;
 	vector<vector<double>>featureMapData3; //final feature map
-	void convolve2(vector<double>,int);
-	void convolve3(vector<double>,int);
+	void convolve2(vector<double>,int,int);
+	void convolve3(vector<double>,int,int);
 	int counter1;
 
 	//for back prop(last layer only)
@@ -33,7 +33,7 @@ public:
 	
 	vector<double>Flattened_features;
 
-	void flatten();
+	void flatten(int);
 
 	
 

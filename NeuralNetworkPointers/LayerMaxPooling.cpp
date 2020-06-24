@@ -15,7 +15,7 @@ LayerMaxPooling::~LayerMaxPooling()
 }
 
 
-void LayerMaxPooling::poolConv(vector<double> e)
+void LayerMaxPooling::poolConv(vector<double> e, int epochs)
 {
 	Eigen::Matrix<double, 19, 19>inputTensor;
 	vector<double>maxNumberStore;
@@ -29,7 +29,7 @@ void LayerMaxPooling::poolConv(vector<double> e)
 			++k;
 		}
 	}
-
+	
 	//MAX VALUE IS FOUND PER 5 BY 5 BLOCK FILTER
 	for (int r = 0; r < 19; r++) {
 		//LIMITED TO 15 FOR PADDING PURPOSES TO AVOID MATRIX SIZE MISMATCH
@@ -42,11 +42,18 @@ void LayerMaxPooling::poolConv(vector<double> e)
 			}
 		}
 	}
-	//RETURNED IN THE FORM OF A VECTOR
-	pooledConv.push_back(maxNumberStore);
+
+	if (epochs == 0) {
+		//RETURNED IN THE FORM OF A VECTOR
+		pooledConv.push_back(maxNumberStore);
+	}
+	else {
+		pooledConv[0] = maxNumberStore;
+	}
+	
 }
 
-void LayerMaxPooling::poolConv2(vector<double>e)
+void LayerMaxPooling::poolConv2(vector<double>e, int epochs)
 {
 	Eigen::Matrix<double, 13, 13>inputTensor;
 	vector<double>maxNumberStore;
@@ -71,7 +78,16 @@ void LayerMaxPooling::poolConv2(vector<double>e)
 			}
 		}
 	}
-	pooledConv1.push_back(maxNumberStore);
+
+
+	if (epochs == 0) {
+		//RETURNED IN THE FORM OF A VECTOR
+		pooledConv1.push_back(maxNumberStore);
+	}
+	else {
+		pooledConv1[0] = maxNumberStore;
+	}
+	//pooledConv1.push_back(maxNumberStore);
 }
 
 

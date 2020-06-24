@@ -23,7 +23,7 @@ outputLayer output;
 Training trn;
 CostFunction cst;
 
-const double learning_rate = 0.5;
+const double learning_rate = 0.1;
 //using namespace Eigen;
 int main(int argc, char** argv) {
 	int epochs = 0;
@@ -47,18 +47,18 @@ int main(int argc, char** argv) {
 		}
 
 		//CONVOLUTIONS AND MAXPOOLING(to match feature map size)
-		conv.convole1(darray); //retouched
+		conv.convole1(darray,epochs); //retouched
 		for (int i = 0; i < 4; i++)
-			maxpooling.poolConv(conv.featureMapData1[i]); //retouched
+			maxpooling.poolConv(conv.featureMapData1[i],epochs); //retouched
 		for (int i = 0; i < 4; i++)
-			conv.convolve2(maxpooling.pooledConv[i],i); //retouched
+			conv.convolve2(maxpooling.pooledConv[i],i,epochs); //retouched
 		for (int i = 0; i < 4; i++)
-			maxpooling.poolConv2(conv.featureMapData2[i]);//retouched
+			maxpooling.poolConv2(conv.featureMapData2[i],epochs);//retouched
 		for (int i = 0; i < 2; i++)
-			conv.convolve3(maxpooling.pooledConv1[i],i);
+			conv.convolve3(maxpooling.pooledConv1[i],i,epochs);
 
 		//FLATTENING
-		conv.flatten();
+		conv.flatten(epochs);
 		LayerFunc.forwardPropagate(conv.Flattened_features);
 		LayerFunc.forwardPropagate2(LayerFunc.firstLayerData);
 		LayerFunc.forwardPropagate3(LayerFunc.secondLayerData); //inputs
