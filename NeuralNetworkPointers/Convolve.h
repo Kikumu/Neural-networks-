@@ -29,7 +29,7 @@ public:
 	vector<double>filter_summary3;
 
 	//vector<vector<double>>inputbackprop1; //for last layer
-	void backpropagation();
+	void backpropagation(vector<vector<double>>, vector<vector<double>>); //takes data from our pooled convolutions because data depends on this
 	
 	vector<double>Flattened_features;
 

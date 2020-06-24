@@ -465,7 +465,7 @@ void Convolve::flatten(int epch)
 	
 }
 
-void Convolve::backpropagation()
+void Convolve::backpropagation(vector<vector<double>> f2, vector<vector<double>> f1)
 {
 	double learning_rate = 0.5;
 
@@ -529,6 +529,12 @@ void Convolve::backpropagation()
 		flattened_loop++;
 
 	}
+
+
+	//flattened_loop = 0;
+	//filter_loop = 0; //iterates through filter(2 - 2 by 2)
+	//new_out_data_1 = 0;
+	//out_data_1 = 0;
 	//double out_data = f[limiter]; //grab neuron information(current dat layer(128))
 	//double out_data1 = firstLayerData[data_loop];// grab neuron info(prev dat layer)
 	//double associated_weight = Firstweight[weights_loop];
@@ -539,8 +545,26 @@ void Convolve::backpropagation()
 	//new_out_data = t.fncSigmoidDerivative(out_data);//take current derivative
 
 	//SECOND CONVOLUTION///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
+	//8 by 8 (64)
+	// 4 filters
+	//(64 summations and pass back error)
+	
+	for (int feature_loop = 0; feature_loop < f2.size(); feature_loop++) {
+		vector<double>temp = f2[feature_loop]; //temp incoming data storage
+		vector<double>weights_temp = data2[feature_loop]; //weights hold temp
+		//find summation/derivatives
+		double sum = 0;
+		for (int data_loop = 0; data_loop < temp.size(); data_loop++) {
+			sum += t.fncSigmoidDerivative(temp[data_loop]);
+		} 
+		sum = (1.0 / (25.0 * sum));
+		//weight change loop
+		for (int weights_loop = 0; weights_loop < data2[feature_loop].size(); weights_loop++) {
+			weights_temp[weights_loop] = weights_temp[weights_loop] + learning_rate * sum; //update
+		}
+		data2[feature_loop] = weights_temp;
+		sum = 0;
+	}
 }
 
 

@@ -111,18 +111,16 @@ int main(int argc, char** argv) {
 		
 
 		//BACK PROPAGATION
-		//THOUGHT SKELETON: GRAB ALL WEIGHT DATA, COMPUTE DERIVATIVES
 		cst.cost_derivative();            //overall network 
 		trn.softmax_derivative();         //overall network 
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 		cout << "\n";
 		cout << cst.cost_derivative_data;
 		LayerFunc.backpropagation(cst.derivative_cost, trn.softmax_derivative_values, conv.Flattened_features);
+		conv.backpropagation(maxpooling.pooledConv1, maxpooling.pooledConv);
 
-		conv.backpropagation();
+
 		cout << "\n";
 		cout << "\n";
 		epochs++;
