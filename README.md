@@ -11,7 +11,7 @@ An ongoing build of a convolutional neural network in c++
 
 4)output error    **DONE**
 
-5)Backward pass   **IN PROGRESS**
+5)Backward pass   **DONE**
 
 
 ## Requirements.
