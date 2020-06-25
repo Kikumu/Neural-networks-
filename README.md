@@ -81,6 +81,8 @@ This error is due to a Windows10Kit missing in the Programfiles(x86) folder.
 48) https://www.jefkine.com/general/2016/09/05/backpropagation-in-convolutional-neural-networks/
 
 
+View network demo here: https://kikumu.github.io/portfolio/CNNEigen.html
+
 
 
 
